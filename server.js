@@ -5,18 +5,23 @@ const connectMongo = require('./config/mongo');
 const { connectSQLite } = require('./config/sqlite');
 const app = require('./app'); // Este ya tiene express y rutas
 
-// Conectar bases de datos
-connectMongo();
-connectSQLite();
-
 const Note = require('./models/sqlite/Note');
-Note.sync(); // Crea la tabla si no existe
 
-
-// Puerto
 const PORT = process.env.PORT || 3000;
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-});
+async function start() {
+  try {
+    await connectMongo();
+    await connectSQLite();
+    await Note.sync(); // Crea la tabla si no existe
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+    });
+  } catch (err) {
+    console.error('❌ Error al iniciar el servidor:', err.message);
+    process.exit(1);
+  }
+}
+
+start();
