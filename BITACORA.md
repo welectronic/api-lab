@@ -2,6 +2,12 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (4)
+- **Estado:** oleada 1 aprobada, pendiente de merge del PO.
+- **Pasó:** revisión r1 de T-001 (`b2fb4fc`) y T-002 (`a218136`): ambas APROBADAS, sin cambios de código. RAPIDO no pre-revisó T-001 (opcional en S). T-002 reporta Gemini 3.8 Flash en lugar de Gemini 3.1 Pro High (decisión del PO). Tropiezos #1 (reporte dañado por escapes de PowerShell) y #2 (modelo del rol). Antigravity trabaja en el clon del PO y lo dejó en la rama `chr/T-002-readme-health`.
+- **Sigue:** el PO integra T-001 y luego T-002 y avisa con `integré`.
+- **Última verificación en verde:** `npm test` → `pass 1, fail 0` en Node 24.13.1 sobre `main`@`cce6718` + merge de `b2fb4fc` y `a218136` (simulado, descartado). `origin/main` = `cce6718`.
+
 ## 2026-09-24 (3)
 - **Estado:** ejecución, oleada 1 liberada de nuevo (T-001, T-002 en `en_progreso`).
 - **Pasó:** SENIOR-1 se activó con la oleada retenida y correctamente no hizo nada. El PO decidió seguir sin corregir el bypass (D-5).
