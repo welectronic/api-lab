@@ -24,5 +24,5 @@ _Actualizado: 2026-09-24 por LIDER_
 ## Para el PO ahora
 - **Activar:** nadie
 - **Merge pendiente:** ninguno
-- **Decisiones pendientes:** JSON malformado en US3 o en E3 (`SPEC.md` → Casos borde); modelo usado en T-002
+- **Decisiones pendientes:** modelo usado en T-002
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO
