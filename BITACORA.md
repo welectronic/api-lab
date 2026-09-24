@@ -2,6 +2,16 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (10)
+- **Estado:** oleada 2 integrada. T-003, T-004 y T-005 `integrada`. E2 completa en código; `Entregada` queda vacía hasta que el PO diga `entregué E2`. CE-003 (E2 en `main` antes del 2026-10-01) cumplido.
+- **Pasó:** el PO integró por PR #4 (T-003), #5 (T-004) y #6 (T-005), en orden. `main` = `b291042`; `266818b`, `0516bdc` y `d2054ca` son ancestros; sin archivos de coordinación en `main`.
+- **Retro oleada 2:**
+  1. Bien: contratos exactos (C-003 a C-005) permitieron 3 tareas en paralelo sin conflictos, y T-005 documentó sin esperar el código.
+  2. Mal: C-003 no enumeró todos los errores de la librería (hallazgo alto que costó una ronda) y ninguna pre-revisión se hizo.
+  3. Cambiar: el LIDER enumera todos los tipos de error al contratar manejadores; los desarrolladores hacen `pull` de `charter` antes de cada ronda (Tropiezo #4); el PO activa a RAPIDO apenas llega un reporte.
+- **Sigue:** decisión del PO: `entregué E2`, E3 (backlog en `PLAN.md`) o cerrar la prueba.
+- **Última verificación en verde:** `origin/main` @ `b291042` (worktree aislado, descartado): `npm ci && npm test` → `tests 15, pass 15, fail 0`, exit 0, Node 24.13.1. `npm audit`: 22 = línea base.
+
 ## 2026-09-24 (9)
 - **Estado:** oleada 2 aprobada completa (T-003 r2, T-004 r1, T-005 r2). Pendiente de merge del PO.
 - **Pasó:** T-003 r2 corrige el hallazgo 1 (A7–A9, fallan antes y pasan después). T-005 r2 se hizo con la tarjeta bloqueada, antes de publicarse D-7; quitó `err.type`, pero faltó el 415. Ronda 3 no permitida: la terminó el LIDER (`d2054ca`, solo `README.md`). Tropiezo #4. Ninguna pre-revisión en toda la oleada.

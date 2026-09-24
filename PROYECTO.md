@@ -9,7 +9,7 @@
 | Versión del kit | ver `kit/VERSION` |
 | Stack | Node.js 24 + Express 5 (CommonJS), Mongoose (MongoDB), Sequelize (SQLite) |
 | Contexto | Laboratorio. Esta iteración es una **prueba mínima del flujo CHARTER**, no del código |
-| Estado | prueba cerrada — oleada 1 integrada (main @ `99531f4`) |
+| Estado | prueba 2 cerrada — oleada 2 (E2) integrada (main @ `b291042`) |
 | Roster | general (`kit/ROSTER.md`) |
 
 ## Preparación del repo

@@ -17,7 +17,7 @@ Prueba mínima del flujo CHARTER con `GET /api/health` + su test + su documentac
 - Claude Code web puede nombrar la rama `claude/…` en vez de `chr/T-001-health`: la revisión lo detecta.
 - `npm audit` falla en la base (D-3): no confundirlo con una falla de la tarea.
 
-- **Oleada 2 (E2, comprometida 2026-10-01):** T-003 (US3, SENIOR-3, pre-revisa RAPIDO), T-004 (US4, SENIOR-1, pre-revisa SENIOR-3) y T-005 (docs + `.env.example`, SENIOR-2, pre-revisa RAPIDO), en paralelo desde `main`. Dictadas por el PO (`tareas: 3`), liberadas el 2026-09-24.
+- **Oleada 2 (E2, comprometida 2026-10-01):** T-003 (US3, SENIOR-3, pre-revisa RAPIDO), T-004 (US4, SENIOR-1, pre-revisa SENIOR-3) y T-005 (docs + `.env.example`, SENIOR-2, pre-revisa RAPIDO), en paralelo desde `main`. Dictadas por el PO (`tareas: 3`), liberadas e integradas el 2026-09-24 (PR #4, #5, #6; `main` @ `b291042`).
 
 ### Análisis de consistencia (oleada 2)
 - **Archivos:** T-003 = `app.js`, `tests/http-hardening.test.js`; T-004 = `routes/healthRoutes.js`, `tests/health-uptime.test.js`; T-005 = `README.md`, `.env.example`. Sin solapamiento.

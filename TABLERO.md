@@ -1,14 +1,14 @@
 # Tablero
 
-_Actualizado: 2026-09-24 por LIDER (oleada 2 aprobada)_
+_Actualizado: 2026-09-24 por LIDER (oleada 2 integrada)_
 
 | Tarea | Título | Asignado | Pre-revisor | Oleada | Tipo valor | Estado | Ronda | Rama |
 |---|---|---|---|---|---|---|---|---|
 | T-001 | GET /api/health + test | SENIOR-1 | RAPIDO | 1 | desbloqueante | integrada | 1 | `chr/T-001-health` |
 | T-002 | Documentar /api/health en README | SENIOR-2 | ninguno | 1 | pulido | integrada | 1 | `chr/T-002-readme-health` |
-| T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | aprobada | 2 | `chr/T-003-http-hardening` |
-| T-004 | GET /api/health/uptime + test | SENIOR-1 | SENIOR-3 | 2 | nucleo | aprobada | 1 | `chr/T-004-uptime` |
-| T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | aprobada (cierre LIDER) | 2 | `chr/T-005-docs-env` |
+| T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | integrada | 2 | `chr/T-003-http-hardening` |
+| T-004 | GET /api/health/uptime + test | SENIOR-1 | SENIOR-3 | 2 | nucleo | integrada | 1 | `chr/T-004-uptime` |
+| T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | integrada (cierre LIDER) | 2 | `chr/T-005-docs-env` |
 
 ## Observaciones del proceso
 | Fecha | Observación | Origen |
@@ -35,6 +35,6 @@ _Actualizado: 2026-09-24 por LIDER (oleada 2 aprobada)_
 
 ## Para el PO ahora
 - **Activar:** nadie
-- **Merge pendiente, en este orden:** `chr/T-003-http-hardening` → `chr/T-004-uptime` → `chr/T-005-docs-env` (a `main`). Luego `CHARTER: api-lab integré T-003, T-004, T-005`
-- **Decisiones pendientes:** ninguna. Opcional: las 3 propuestas al kit
+- **Merge pendiente:** ninguno
+- **Decisiones pendientes:** `entregué E2` cuando la des por entregada; las 3 propuestas al kit (opcional); siguiente paso: E3 o cerrar la prueba
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO
