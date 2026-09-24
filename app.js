@@ -31,15 +31,20 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Recurso no encontrado' });
 });
 
-// Errores de body: cuerpo fijo, sin stack ni err.message. El resto sigue su camino (E3)
+// Errores de body-parser (4xx con err.type): cuerpo fijo, sin stack ni err.message. El resto sigue su camino (E3)
 app.use((err, req, res, next) => {
-  if (err.type === 'entity.parse.failed') {
-    return res.status(400).json({ error: 'JSON malformado' });
+  if (typeof err.type !== 'string' || !(err.status >= 400 && err.status <= 499)) {
+    return next(err);
   }
-  if (err.type === 'entity.too.large') {
-    return res.status(413).json({ error: 'Cuerpo demasiado grande' });
+  let error = 'Petición inválida';
+  if (err.status === 400 && err.type === 'entity.parse.failed') {
+    error = 'JSON malformado';
+  } else if (err.status === 413) {
+    error = 'Cuerpo demasiado grande';
+  } else if (err.status === 415) {
+    error = 'Tipo de contenido no soportado';
   }
-  next(err);
+  res.status(err.status).json({ error });
 });
 
 module.exports = app;

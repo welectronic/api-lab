@@ -46,6 +46,7 @@ function jsonOfSize(kb) {
 const NOT_FOUND = { error: 'Recurso no encontrado' };
 const BAD_JSON = { error: 'JSON malformado' };
 const TOO_LARGE = { error: 'Cuerpo demasiado grande' };
+const UNSUPPORTED = { error: 'Tipo de contenido no soportado' };
 
 test('200: GET /api/health lleva los headers de protección y no X-Powered-By', async () => {
   const res = await fetch(`${baseUrl}/api/health`);
@@ -127,6 +128,45 @@ test('A3: JSON gzip pequeño que descomprime a más de 100 kb responde 413', asy
   assertHeaders(res);
   const text = await assertJsonError(res, 413, TOO_LARGE);
   assertNoLeak(text, ['PayloadTooLargeError']);
+});
+
+test('A7: urlencoded con 1100 parámetros (menos de 100 kb) responde 413 exacto, sin stack', async () => {
+  const body = Array.from({ length: 1100 }, (_, i) => `k${i}=1`).join('&');
+  assert.ok(body.length < 100 * 1024, 'el cuerpo debe ocupar menos de 100 kb');
+
+  const res = await fetch(`${baseUrl}/api/health`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body,
+  });
+
+  assertHeaders(res);
+  const text = await assertJsonError(res, 413, TOO_LARGE);
+  assertNoLeak(text, ['too many parameters', 'PayloadTooLargeError']);
+});
+
+test('A8: JSON con Content-Encoding no soportado responde 415 exacto, sin stack', async () => {
+  const res = await fetch(`${baseUrl}/api/health`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Content-Encoding': 'foo' },
+    body: '{"a":1}',
+  });
+
+  assertHeaders(res);
+  const text = await assertJsonError(res, 415, UNSUPPORTED);
+  assertNoLeak(text, ['UnsupportedMediaTypeError', 'foo']);
+});
+
+test('A9: JSON con charset no soportado responde 415 exacto, sin stack', async () => {
+  const res = await fetch(`${baseUrl}/api/health`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=klingon' },
+    body: '{"a":1}',
+  });
+
+  assertHeaders(res);
+  const text = await assertJsonError(res, 415, UNSUPPORTED);
+  assertNoLeak(text, ['UnsupportedMediaTypeError', 'klingon']);
 });
 
 test('JSON válido de ~90 kb no recibe 413 ni 400', async () => {
