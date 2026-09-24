@@ -49,7 +49,7 @@ Si necesitas cambiar algo que no es tuyo, escríbelo como propuesta en tu report
 
 ## 5. Mientras desarrollas
 
-- **Cada tarea en su propia carpeta (worktree):** `git worktree add ../<repo>.T-XXX -b <rama> origin/<rama_origen>` (o sin `-b` si la rama ya existe). Nunca cambies de rama en el clon principal: otras instancias pueden estar usándolo en el mismo equipo. En entornos web con sandbox propio, la sesión ya es tu carpeta aislada.
+- **Cada tarea en su propia carpeta (worktree):** `git worktree add --no-track -b <rama> ../<repo>.T-XXX origin/<rama_origen>` y el primer push con `git push -u origin <rama>`. Nunca cambies de rama en el clon principal: otras instancias pueden estar usándolo en el mismo equipo. En entornos web con sandbox propio, la sesión ya es tu carpeta aislada.
 - Trabaja solo en la rama de la tarea (`chr/T-XXX-<slug>`).
 - Toca solo los archivos permitidos. Si necesitas otro, detente y repórtalo como bloqueo.
 - Respeta los contratos al pie de la letra. Si un contrato está mal, no lo cambies: repórtalo.
@@ -152,9 +152,9 @@ El valor para la agencia es **entregar lo comprometido, a tiempo, sin retrabajo 
 
 | Qué se mide | De dónde sale | Quién lo registra |
 |---|---|---|
-| **Esfuerzo de IA** | `inicio`, `fin` y `sesiones` de cada reporte, pre-revisión y revisión | Cada desarrollador y el LIDER, con la hora real del sistema |
-| **Esfuerzo del PO** | `esfuerzo_po_horas` de la tarea | El LIDER, cuando el PO lo dice (`integré T-004 (30 min)`) |
-| **Precisión de estimación** | Horas reales por talla contra la referencia: S ≈ 2 h, M ≈ 6 h de IA | Automático |
+| **Esfuerzo de IA** | `inicio`, `fin` y `sesiones` de cada reporte, pre-revisión y revisión | Cada desarrollador y el LIDER, con la hora real del sistema **y su zona horaria** |
+| **Esfuerzo del PO** | `esfuerzo_po_horas` de la tarea | El LIDER, cuando el PO lo dice (`integré T-004 (30 min)`). Si el PO no lo dice, el LIDER lo pregunta en una línea en *Para el PO ahora*: es el costo más alto y el cuello de botella real |
+| **Precisión de estimación** | Horas reales por talla contra la referencia: S ≈ 15 min, M ≈ 1 h de IA (calibrado con la prueba api-lab; se ajusta con los datos reales) | Automático |
 | **Compromisos** | Columnas `Comprometida` y `Entregada` de la tabla de épicas en `SPEC.md` | El LIDER: comprometida al planear; entregada cuando el PO dice `entregué E1` |
 | **Pronóstico** | Ritmo real (tareas integradas por semana en las últimas 4) y lo que falta de cada épica | Automático |
 | **Antigüedad** | Días en progreso (desde `liberada`) o en revisión (desde el último reporte) | Automático; alerta a los 3 y 2 días |

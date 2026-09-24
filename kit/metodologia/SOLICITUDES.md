@@ -1,6 +1,6 @@
 # Cómo el PO pide trabajo al LIDER
 
-El PO nunca instruye a los desarrolladores. Pide el trabajo al LIDER, y el LIDER lo convierte en tarjetas de tarea. El desarrollador solo recibe `CHARTER: <proyecto> <ID>` y lee su tarjeta.
+El PO nunca instruye a los desarrolladores. Pide el trabajo al LIDER, y el LIDER lo convierte en tarjetas de tarea. El desarrollador solo recibe `CHARTER: <proyecto> <ROL> T-XXX` y lee su tarjeta.
 
 Hay cuatro formas de pedir: A y B para trabajo nuevo, C y D para lo que reportan los usuarios.
 
@@ -33,7 +33,7 @@ CHARTER: <proyecto> tareas: <N>
 4. **Cuando tiene las N tareas**, el LIDER valida el conjunto:
    - Que no compartan archivos. Si chocan, propone repartirlos o encadenar las tareas con `depende_de`.
    - Que los contratos entre tareas estén definidos.
-   - Que cada una tenga un rol asignado (el que pidió el PO, o uno según `ROLES.md`) y un pre-revisor cuando aplique.
+   - Que cada una tenga un rol asignado (el que pidió el PO, o uno según `ROLES.md`) y un pre-revisor si es M o `sensible`.
    - Que las tareas sensibles tengan casos de abuso.
 5. **Entrega en una sola respuesta:**
    - Una tabla corta: tarea, título, rol, seguridad y dependencias.

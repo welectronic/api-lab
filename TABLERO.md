@@ -1,6 +1,6 @@
 # Tablero
 
-_Actualizado: 2026-09-24 por LIDER (oleada 2 integrada)_
+_Actualizado: 2026-09-24 por LIDER_
 
 | Tarea | Título | Asignado | Pre-revisor | Oleada | Tipo valor | Estado | Ronda | Rama |
 |---|---|---|---|---|---|---|---|---|
@@ -29,12 +29,12 @@ _Actualizado: 2026-09-24 por LIDER (oleada 2 integrada)_
 ## Propuestas al kit (pendientes del PO)
 | Fecha | Propuesta | Propuesta por | Estado |
 |---|---|---|---|
-| 2026-09-24 | `git worktree add --no-track -b <rama> ../<repo>.T-XXX origin/<base>` + `git push -u origin <rama>`: sin `--no-track` la rama queda siguiendo `origin/main` y un `git push` sin argumentos apunta a `main` (con D-5 GitHub no lo impide) | SENIOR-1 (T-004) | pendiente |
-| 2026-09-24 | Activación con rol y tarea: `CHARTER: <proyecto> <ROL> T-XXX`, para que la instancia no deduzca el rol | SENIOR-1 (T-004) | pendiente |
-| 2026-09-24 | ROSTER: SENIOR-3 = "Claude Code (local o web)", o una fila aparte para web | SENIOR-3 (T-003) | pendiente |
+| 2026-09-24 | `git worktree add --no-track -b <rama> ../<repo>.T-XXX origin/<base>` + `git push -u origin <rama>`: sin `--no-track` la rama queda siguiendo `origin/main` y un `git push` sin argumentos apunta a `main` (con D-5 GitHub no lo impide) | SENIOR-1 (T-004) | aplicada (CHANGELOG 2026-09-25) |
+| 2026-09-24 | Activación con rol y tarea: `CHARTER: <proyecto> <ROL> T-XXX`, para que la instancia no deduzca el rol | SENIOR-1 (T-004) | aplicada (CHANGELOG 2026-09-25) |
+| 2026-09-24 | ROSTER: SENIOR-3 = "Claude Code (local o web)", o una fila aparte para web | SENIOR-3 (T-003) | aplicada (CHANGELOG 2026-09-25) |
 
 ## Para el PO ahora
 - **Activar:** nadie
 - **Merge pendiente:** ninguno
-- **Decisiones pendientes:** `entregué E2` cuando la des por entregada; las 3 propuestas al kit (opcional); siguiente paso: E3 o cerrar la prueba
+- **Decisiones pendientes:** `entregué E2` cuando la des por entregada; siguiente paso: E3 o cerrar la prueba
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

@@ -2,7 +2,7 @@
 id: T-XXX
 titulo: <verbo + objeto>
 asignado: LIDER | SENIOR-1 | SENIOR-2 | RAPIDO
-prerevisor: <ID distinto al autor, o ninguno>
+prerevisor: <ID distinto al autor; obligatorio si talla M o seguridad sensible, si no: ninguno>
 talla: S | M
 tipo_valor: desbloqueante | nucleo | robustez | pulido | especulativo
 tipo: evolutivo | correctivo | ajuste
@@ -23,6 +23,7 @@ seguridad: normal | sensible
 creada: AAAA-MM-DD
 liberada: <AAAA-MM-DD, cuando pasa a en_progreso>
 integrada: <AAAA-MM-DD, cuando el PO confirma el merge>
+cierre_lider: no
 esfuerzo_po_horas: <horas del PO en esta tarea (revisar, probar, integrar); lo anota el LIDER>
 ---
 

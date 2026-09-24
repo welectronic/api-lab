@@ -22,10 +22,11 @@ Un proyecto puede tener su propio `ROSTER.md` en su carpeta; si existe, reemplaz
 | `SENIOR-1` | Claude (app o Claude Code) | Claude Opus | Pro | Mismo modelo, límites más bajos: solo tareas S/M |
 | `SENIOR-2` | Antigravity | Gemini 3.1 Pro (High) | Propia | Seleccionar el modelo antes de activar |
 | `RAPIDO` | Antigravity | Gemini 3.8 Flash (Medium) | Propia | Misma instalación que SENIOR-2, con otro modelo |
-| `SENIOR-3` | Claude Code local (sesión aparte de la del LIDER) | Claude Opus | Team (compartida con el LIDER) | Skill `charter-desarrollador` en `~/.claude/skills/`. Comparte cuota con el LIDER |
+| `SENIOR-3` | Claude Code (local, escritorio o web; sesión aparte de la del LIDER) | Claude Opus | Team (compartida con el LIDER) | Skill `charter-desarrollador` en `~/.claude/skills/`. Comparte cuota con el LIDER |
 
 ## Reglas del roster
 
+- **Lo que se controla es el modelo, no la herramienta.** Un rol de Claude puede correr en Claude Code local, de escritorio o web, siempre con el modelo de su fila; cada instancia confirma su modelo antes de trabajar y lo pone en `herramienta_modelo`. Una misma sesión ocupa un solo rol a la vez.
 - Un rol puede quedar vacío. Sus tareas pasan al siguiente rol de la cadena de respaldo.
 - **Cadena de respaldo:** `RAPIDO → SENIOR-2 → SENIOR-1 → LIDER`.
 - Si una instancia se queda sin cuota, el PO avisa al LIDER con `CHARTER: <proyecto> sin cuota <ID>`. El LIDER reasigna sus tareas pendientes según la cadena.

@@ -5,8 +5,8 @@ revisor: LIDER
 commit_revisado: <hash>
 veredicto: APROBADA | CAMBIOS_SOLICITADOS | REASIGNADA
 fecha: AAAA-MM-DD
-inicio: <AAAA-MM-DD HH:MM, al empezar (hora real del sistema)>
-fin: <AAAA-MM-DD HH:MM, al terminar>
+inicio: <AAAA-MM-DD HH:MM ±HHMM, al empezar (hora real del sistema con zona)>
+fin: <AAAA-MM-DD HH:MM ±HHMM, al terminar>
 sesiones: 1
 ---
 
@@ -56,3 +56,5 @@ sesiones: 1
 ## Para el PO (solo si APROBADA)
 - Rama `chr/T-XXX-<slug>` → merge a `<rama base>`
 - Notas de integración: <orden de merge, migraciones, conflictos esperados>
+
+> Si revisas varias tareas en un mismo bloque, pon el mismo `inicio` y `fin` en todas: el tablero reparte ese tiempo entre ellas, no lo suma varias veces.

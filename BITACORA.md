@@ -2,6 +2,10 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (11)
+- **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO (`kit/VERSION` (d)). Las 3 propuestas al kit del tablero (`--no-track` + `push -u`, activación `<ROL> T-XXX`, ROSTER por modelo) quedan `aplicada` según el CHANGELOG.
+- **Nota para próximas tareas:** la pre-revisión ahora es obligatoria en M o `sensible` y la activa el LIDER; activación `CHARTER: api-lab <ROL> T-XXX`.
+
 ## 2026-09-24 (10)
 - **Estado:** oleada 2 integrada. T-003, T-004 y T-005 `integrada`. E2 completa en código; `Entregada` queda vacía hasta que el PO diga `entregué E2`. CE-003 (E2 en `main` antes del 2026-10-01) cumplido.
 - **Pasó:** el PO integró por PR #4 (T-003), #5 (T-004) y #6 (T-005), en orden. `main` = `b291042`; `266818b`, `0516bdc` y `d2054ca` son ancestros; sin archivos de coordinación en `main`.

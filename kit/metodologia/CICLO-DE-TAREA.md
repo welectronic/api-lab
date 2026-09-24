@@ -28,7 +28,7 @@ pendiente ─► en_progreso ─► (pre-revisión) ─► en_revision ─► ap
 
 Su objetivo es ahorrar cuota del LIDER filtrando los errores evidentes.
 
-1. La tarea indica `prerevisor: <ID>`, que debe ser distinto del autor. Cuando el autor entrega su reporte con `listo_para_revision`, el PO activa al pre-revisor, que la toma sin esperar al LIDER.
+1. **La pre-revisión es obligatoria en tareas M o `sensible`** y no se usa en tareas S `normal` (`prerevisor: ninguno`). La tarea indica `prerevisor: <ID>`, distinto del autor. Cuando llega un reporte `listo_para_revision`, el LIDER pone en *Para el PO ahora* el comando para activar al pre-revisor, y el PO lo activa de inmediato. El LIDER **no revisa** una tarea que requiere pre-revisión sin ella, salvo que el PO escriba `revisar sin pre-revisión`.
 2. El pre-revisor lee el diff de la rama contra la base, corre la verificación y llena `revisiones/T-XXX-rN-pre.md` con `plantillas/PRE-REVISION.md`.
 3. **No decide**: su resultado es `pasa_a_lider` o `devolver_al_autor`, con evidencia. Si devuelve, el LIDER confirma leyendo solo la pre-revisión y marca `cambios_solicitados`.
 
@@ -51,7 +51,9 @@ Su objetivo es ahorrar cuota del LIDER filtrando los errores evidentes.
 
 ## Límite de rondas
 
-Máximo **2 rondas** de cambios. En la tercera, el LIDER la termina, la redefine o la reasigna al siguiente rol de la cadena de respaldo.
+Máximo **2 rondas** de cambios. Si hace falta una tercera:
+- **Cierre por el LIDER**, solo si lo que falta es trivial (documentación o una línea sin lógica ni seguridad): el LIDER lo hace, marca `cierre_lider: si` en la tarea y registra su esfuerzo en la revisión. Cuenta como retrabajo.
+- En cualquier otro caso, el LIDER la **redefine** o la **reasigna** al siguiente rol de la cadena de respaldo.
 
 ## Integración (PO)
 

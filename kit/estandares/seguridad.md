@@ -64,6 +64,8 @@ Configuración base: `configs/seguridad/`. Los comandos se agregan a *Comandos d
 **Dependencias**
 - Solo paquetes mantenidos, con versión fijada (lockfile en el repo).
 
+- **Manejo de errores completo:** el contrato del manejador enumera todos los errores que emite el framework y sus librerías (parsers de body, validación, autenticación, rutas inexistentes, errores no controlados). Ninguno puede llegar al manejador por defecto del framework, que suele responder con stack trace o rutas internas. Se prueba con un caso de abuso por tipo de error.
+
 ## 4. Riesgos específicos de código generado por IA
 
 | Riesgo | Control |

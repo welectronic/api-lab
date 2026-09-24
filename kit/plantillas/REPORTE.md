@@ -7,8 +7,8 @@ estado: listo_para_revision | bloqueada
 rama: chr/T-XXX-<slug>
 commit: <hash corto del último commit>
 fecha: AAAA-MM-DD
-inicio: <AAAA-MM-DD HH:MM, al empezar (hora real del sistema)>
-fin: <AAAA-MM-DD HH:MM, al terminar>
+inicio: <AAAA-MM-DD HH:MM ±HHMM, al empezar (hora real del sistema con zona)>
+fin: <AAAA-MM-DD HH:MM ±HHMM, al terminar>
 sesiones: 1
 ---
 

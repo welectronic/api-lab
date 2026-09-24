@@ -5,8 +5,8 @@ prerevisor: <TU-ID>
 commit_revisado: <hash>
 resultado: pasa_a_lider | devolver_al_autor
 fecha: AAAA-MM-DD
-inicio: <AAAA-MM-DD HH:MM, al empezar (hora real del sistema)>
-fin: <AAAA-MM-DD HH:MM, al terminar>
+inicio: <AAAA-MM-DD HH:MM ±HHMM, al empezar (hora real del sistema con zona)>
+fin: <AAAA-MM-DD HH:MM ±HHMM, al terminar>
 sesiones: 1
 ---
 
