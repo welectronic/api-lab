@@ -2,6 +2,10 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (13)
+- **Pasó:** el cliente aceptó E2: `Aceptada` = 2026-09-24. E2 cerrada: comprometida 2026-10-01, entregada y aceptada 2026-09-24.
+- **Sigue:** E3 o cerrar la prueba.
+
 ## 2026-09-24 (12)
 - **Pasó:** el PO dio E2 por entregada: `Entregada` = 2026-09-24, 7 días antes de lo comprometido (2026-10-01). `main` @ `b291042`. Desde hoy, los ajustes y bugs de E2 cuentan como retrabajo del cliente (garantía).
 - **Sigue:** `el cliente aceptó E2`; E3 o cerrar la prueba.
