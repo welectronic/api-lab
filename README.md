@@ -45,9 +45,11 @@ El servidor queda disponible en `http://localhost:3000`.
 - Límite de `100kb` para el cuerpo de las peticiones (JSON y urlencoded), respondiendo `413` si se supera.
 
 Cuerpos de error estándar (`Content-Type: application/json; charset=utf-8`):
-- Ruta inexistente → 404 `{"error":"Recurso no encontrado"}`
-- JSON malformado → 400 `{"error":"JSON malformado"}`
-- Cuerpo de más de 100 kb → 413 `{"error":"Cuerpo demasiado grande"}`
+- 404 `{"error":"Recurso no encontrado"}` — la ruta no existe (cualquier método)
+- 400 `{"error":"JSON malformado"}` — el cuerpo JSON no se puede leer
+- 413 `{"error":"Cuerpo demasiado grande"}` — el cuerpo supera 100 kb o tiene demasiados parámetros
+- 415 `{"error":"Tipo de contenido no soportado"}` — codificación o charset no soportados
+- 4xx `{"error":"Petición inválida"}` — cualquier otro cuerpo que la API rechace
 
 ## Endpoints
 
