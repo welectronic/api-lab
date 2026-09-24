@@ -9,12 +9,13 @@
 | Versión del kit | ver `kit/VERSION` |
 | Stack | Node.js 24 + Express 5 (CommonJS), Mongoose (MongoDB), Sequelize (SQLite) |
 | Contexto | Laboratorio. Esta iteración es una **prueba mínima del flujo CHARTER**, no del código |
-| Estado | ejecución (oleada 1) |
+| Estado | levantamiento — oleada 1 RETENIDA (Fase 0 falla) |
 | Roster | general (`kit/ROSTER.md`) |
 
 ## Preparación del repo
 - Confirmada por el PO: 2026-09-24
-- Prueba de humo (push a la base rechazado): OK (informada por el PO, 2026-09-24)
+- Prueba de humo (push a la base rechazado): **FALLA** — el PO la informó como OK, pero el commit vacío `cce6718 "prueba de humo"` **entró a `main`** por push directo (actividad de GitHub: `push` de `welectronic`, 2026-09-24T07:24:09Z). Causa probable: Claude Code web empuja con la identidad del PO, que está en la *bypass list* del ruleset. El commit es vacío (sin cambios de archivos); se deja, no se reescribe la historia.
+- **Oleada 1 retenida** hasta repetir la prueba de humo con la bypass list corregida.
 - Verificado por el LIDER vía API de GitHub (2026-09-24): `main` `protected: true`, reglas `deletion`, `non_fast_forward`, `pull_request`; `charter` con `deletion` y `non_fast_forward`. Ramas sobrantes borradas del remoto.
 - Token del LIDER vence: no aplica — el LIDER usa la credencial de Git del PO en su PC (D-2).
 - Repo **público a propósito** (laboratorio). Esta rama es legible por cualquiera: nada interno ni sensible aquí (D-1).
