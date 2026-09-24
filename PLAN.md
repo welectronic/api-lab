@@ -17,10 +17,14 @@ Prueba mínima del flujo CHARTER con `GET /api/health` + su test + su documentac
 - Claude Code web puede nombrar la rama `claude/…` en vez de `chr/T-001-health`: la revisión lo detecta.
 - `npm audit` falla en la base (D-3): no confundirlo con una falla de la tarea.
 
+- **Oleada 2 (E2, comprometida 2026-10-01):** US3 y US4. El PO dictará las tareas con `tareas: 3`.
+
 ## Backlog (recortado o diferido)
-| Ítem | Tipo de valor | Motivo | Origen |
-|---|---|---|---|
-| Actualizar dependencias vulnerables (`mongoose`, `sequelize`, `sqlite3` → 6.x mayor; transitivas `tar`, `path-to-regexp`, `lodash`…) | robustez | 1 critical + 14 high en `npm audit` | LIDER, 2026-09-24 |
-| T-000: gitleaks, Semgrep, ESLint/Prettier y CI | robustez | Omitido en la prueba (D-4) | LIDER |
-| `database.sqlite` está versionado en `main`: confirmar que no tiene datos reales y sacarlo del repo (`.gitignore`) | robustez | Repo público (D-1) | LIDER, 2026-09-24 |
-| Los endpoints existentes devuelven `err.message` al cliente (expone detalles internos) | robustez | `seguridad.md` §3 HTTP | LIDER, 2026-09-24 |
+| Ítem | Épica | Tipo de valor | Motivo | Origen |
+|---|---|---|---|---|
+| Actualizar dependencias vulnerables (`mongoose`, `sequelize`, `sqlite3` → 6.x mayor; transitivas `tar`, `path-to-regexp`, `lodash`…) | E3 | robustez | 1 critical + 14 high en `npm audit` | LIDER, 2026-09-24 |
+| T-000: gitleaks, Semgrep, ESLint/Prettier y CI | E3 | robustez | Omitido en la prueba (D-4) | LIDER |
+| Los endpoints existentes devuelven `err.message` al cliente (expone detalles internos) | E3 | robustez | `seguridad.md` §3 HTTP | LIDER, 2026-09-24 |
+| Logs de peticiones (método, ruta, status, duración; sin datos personales ni cuerpos) | E3 | robustez | Observabilidad | LIDER, 2026-09-24 |
+| `database.sqlite` está versionado en `main`: confirmar que no tiene datos reales y sacarlo del repo (`.gitignore`) | E3 | robustez | Repo público (D-1) | LIDER, 2026-09-24 |
+| Revisar `Content-Security-Policy` y `Strict-Transport-Security` para el despliegue | E3 | robustez | Fuera de alcance de US3 | LIDER, 2026-09-24 |

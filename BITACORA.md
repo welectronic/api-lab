@@ -1,5 +1,9 @@
 # Bitácora
 
+## 2026-09-24 (8)
+- **Estado:** E2 especificada (US3 sensible, US4 normal; RF-004 a RF-009). E3 "Seguridad continua" en el backlog, sin fecha.
+- **Sigue:** el PO dicta las tareas de E2 con `CHARTER: api-lab tareas: 3`.
+
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
 ## 2026-09-24 (7)
