@@ -2,6 +2,12 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (5)
+- **Estado:** prueba cerrada. T-001 y T-002 `integrada`.
+- **Pasó:** el PO integró por PR #2 (T-001) y #3 (T-002), en orden. `main` = `99531f4`; ambos commits de tarea son ancestros; `main` sin archivos de coordinación.
+- **Sigue:** sin oleada 2. Backlog en `PLAN.md` (dependencias vulnerables, T-000 con escaneos, `database.sqlite` versionado, `err.message` expuesto). Corregir el bypass (D-5) antes de cualquier proyecto real.
+- **Última verificación en verde:** `npm ci && npm test` → `tests 1, pass 1, fail 0`, exit 0, Node 24.13.1, sobre `main` @ `99531f4` (worktree aislado, LIDER).
+
 ## 2026-09-24 (4)
 - **Estado:** oleada 1 aprobada, pendiente de merge del PO.
 - **Pasó:** revisión r1 de T-001 (`b2fb4fc`) y T-002 (`a218136`): ambas APROBADAS, sin cambios de código. RAPIDO no pre-revisó T-001 (opcional en S). T-002 reporta Gemini 3.8 Flash en lugar de Gemini 3.1 Pro High (decisión del PO). Tropiezos #1 (reporte dañado por escapes de PowerShell) y #2 (modelo del rol). Antigravity trabaja en el clon del PO y lo dejó en la rama `chr/T-002-readme-health`.
