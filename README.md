@@ -28,11 +28,26 @@ PORT=3000
 ```bash
 npm start      # modo normal
 npm run dev    # modo desarrollo con nodemon
+npm test       # corre los tests (no requiere bases de datos)
 ```
 
 El servidor queda disponible en `http://localhost:3000`.
 
 ## Endpoints
+
+### Salud
+
+| Método | Ruta                          | Descripción                     |
+|--------|-------------------------------|---------------------------------|
+| GET    | `/api/health`                 | Comprueba el estado de la API   |
+
+Ejemplo de respuesta (200 OK):
+
+```json
+{
+  "status": "ok"
+}
+```
 
 ### Películas (MongoDB)
 
