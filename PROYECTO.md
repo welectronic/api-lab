@@ -1,0 +1,50 @@
+# api-lab
+
+| Campo | Valor |
+|---|---|
+| Tipo | repo existente |
+| Repo | `welectronic/api-lab` (cada instancia usa su clon local ya existente; no se clona de nuevo) |
+| Rama base | `main` |
+| Coordinación | rama `charter` (worktree en `../api-lab.charter`) |
+| Versión del kit | ver `kit/VERSION` |
+| Stack | Node.js 24 + Express 5 (CommonJS), Mongoose (MongoDB), Sequelize (SQLite) |
+| Contexto | Laboratorio. Esta iteración es una **prueba mínima del flujo CHARTER**, no del código |
+| Estado | ejecución (oleada 1) |
+| Roster | general (`kit/ROSTER.md`) |
+
+## Preparación del repo
+- Confirmada por el PO: 2026-09-24
+- Prueba de humo (push a la base rechazado): OK (informada por el PO, 2026-09-24)
+- Verificado por el LIDER vía API de GitHub (2026-09-24): `main` `protected: true`, reglas `deletion`, `non_fast_forward`, `pull_request`; `charter` con `deletion` y `non_fast_forward`. Ramas sobrantes borradas del remoto.
+- Token del LIDER vence: no aplica — el LIDER usa la credencial de Git del PO en su PC (D-2).
+- Repo **público a propósito** (laboratorio). Esta rama es legible por cualquiera: nada interno ni sensible aquí (D-1).
+
+## Cómo correrlo
+```
+npm ci
+npm test                 # no requiere MongoDB ni SQLite (desde T-001)
+npm start                # requiere .env con MONGO_URI (ver README)
+```
+
+## Estándares heredados
+- `kit/estandares/seguridad.md`. El kit no tiene estándar Node/Express: mandan las convenciones del repo (`CONVENCIONES.md`).
+
+## Comandos de verificación (obligatorios antes de entregar)
+```
+# Instalación limpia
+npm ci
+# Tests
+npm test
+# Alcance: solo archivos permitidos por la tarea
+git diff --stat origin/main...HEAD
+# Seguridad
+npm audit --audit-level=high     # INFORMATIVO en la oleada 1: la base ya tiene hallazgos (D-3).
+                                 # Pegar el resumen; la tarea falla solo si el conteo cambia respecto a la base.
+```
+Secretos: los cubre el *push protection* de GitHub (activo). gitleaks y Semgrep no están instalados en este repo; se agregan en una tarea futura (`PLAN.md` → backlog).
+
+Línea base de `npm audit` en `main` @ `9b5b5aa` (2026-09-24, LIDER): **22 vulnerabilidades (2 low, 5 moderate, 14 high, 1 critical)**.
+
+## Restricciones
+- Sin dependencias nuevas en la oleada 1.
+- No tocar la conexión a BD (`config/`, `server.js`) ni los endpoints existentes.

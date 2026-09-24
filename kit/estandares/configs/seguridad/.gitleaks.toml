@@ -1,0 +1,7 @@
+# gitleaks — reglas por defecto + exclusiones del proyecto
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Archivos de ejemplo sin secretos reales"
+paths = ['''\.env\.example$''']
