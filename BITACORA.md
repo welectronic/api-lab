@@ -12,6 +12,13 @@ Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 - **Retro oleada 1:** funcionó: tareas con contrato y "falla cuando", cero conflictos, nadie hizo PR ni push a `main`. No funcionó: bypass de admin, modelo equivocado en SENIOR-2, reporte dañado por PowerShell. Propuesta al kit: ya aplicada por el PO (CHANGELOG 2026-09-24).
 - **Sigue:** el PO define el alcance de E2 (`requerimiento:`).
 
+## 2026-09-24 (7)
+- **Estado:** revisión r1 de la oleada 2. T-004 APROBADA; T-003 y T-005 CAMBIOS_SOLICITADOS, bloqueadas hasta la decisión del PO.
+- **Pasó:** 3 reportes, 0 pre-revisiones. Integración simulada de las 3 ramas sin conflictos. Hallazgo alto en T-003: los errores de body-parser que C-003 no enumeraba (413 por parámetros, 415 por encoding o charset) responden HTML con stack y rutas absolutas fuera de `production`. Es previo a la tarea y el hueco era del contrato del LIDER. T-005: el README copió las anotaciones `err.type` de C-003 (baja).
+- **Aprendizaje (LIDER):** al contratar un manejador de errores, enumerar todos los tipos que emite la librería, no solo los del requisito. Separar en el contrato lo que se documenta de las notas de implementación.
+- **Sigue:** el PO decide A (ronda 2 de T-003 y T-005, ampliando C-003) o B (diferir, D-7). El PO puede integrar T-004 ya.
+- **Última verificación en verde:** `main` @ `99531f4` + merge de `e93c7b7`, `0516bdc` y `88d01de` (worktree temporal, descartado): `npm ci && npm test` → `tests 12, pass 12, fail 0`, exit 0, Node 24.13.1. `origin/main` = `99531f4`.
+
 ## 2026-09-24 (6)
 - **Estado:** prueba cerrada; kit ajustado con lo aprendido.
 - **Pasó:** a pedido del PO, el LIDER actualizó CHARTER-DEV: `PREPARACION-REPO.md` (bypass solo para PR si los agentes usan la cuenta del PO; "Bypassed" no es rechazo; confirmar en el remoto), `desarrollador.md` + skill + zip (verificar el modelo contra el ROSTER, worktree propio si el clon es compartido, reportes con la herramienta de edición en UTF-8 sin BOM), `configuracion-plataformas.md` y `guias/PRUEBA-API-LAB.md`. Copiado `PREPARACION-REPO.md` a `kit/`; `kit/VERSION` = 2026-09-24 (b).
