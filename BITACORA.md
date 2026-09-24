@@ -17,6 +17,13 @@ Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 - **Pasó:** a pedido del PO, el LIDER actualizó CHARTER-DEV: `PREPARACION-REPO.md` (bypass solo para PR si los agentes usan la cuenta del PO; "Bypassed" no es rechazo; confirmar en el remoto), `desarrollador.md` + skill + zip (verificar el modelo contra el ROSTER, worktree propio si el clon es compartido, reportes con la herramienta de edición en UTF-8 sin BOM), `configuracion-plataformas.md` y `guias/PRUEBA-API-LAB.md`. Copiado `PREPARACION-REPO.md` a `kit/`; `kit/VERSION` = 2026-09-24 (b).
 - **Sigue:** el PO reinstala la skill de desarrollador en Claude (Pro) y Antigravity.
 
+## 2026-09-24 (6)
+- **Estado:** oleada 2 (E2) liberada. T-003, T-004 y T-005 en `en_progreso`, en paralelo desde `main` @ `99531f4`.
+- **Pasó:** el PO dictó 3 tareas (`tareas: 3`). Aclaraciones en `SPEC.md`: límite de 100 kb en JSON y urlencoded; JSON malformado → 400 en US3 (D-6); uptime = `Math.floor(process.uptime())`. Contratos C-003, C-004 y C-005 en `ARQUITECTURA.md`, con modelo de amenazas. Tropiezo #3 (worktree propio). Modelo de T-002 registrado como no confirmado, sin bloqueo (PO).
+- **Decidido:** D-6. T-005 en paralelo contra los contratos; las diferencias con lo integrado se piden a T-005 (PO). RAPIDO pre-revisa T-003 y T-005.
+- **Sigue:** SENIOR-3, SENIOR-1 y SENIOR-2 desarrollan; luego pre-revisiones y `CHARTER: api-lab revisar`. En cada revisión: `origin/main` = `99531f4` salvo merges del PO.
+- **Última verificación en verde:** sobre `main` @ `99531f4`, Express 5.1.0: 404 y 400 responden HTML con `X-Powered-By: Express`; JSON de 150 kb, urlencoded de 150 kb y gzip de 191 bytes que descomprime a 150 kb → 413 con stack en consola. Es la línea base que T-003 debe cambiar.
+
 ## 2026-09-24 (5)
 - **Estado:** prueba cerrada. T-001 y T-002 `integrada`.
 - **Pasó:** el PO integró por PR #2 (T-001) y #3 (T-002), en orden. `main` = `99531f4`; ambos commits de tarea son ancestros; `main` sin archivos de coordinación.

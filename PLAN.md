@@ -17,7 +17,16 @@ Prueba mínima del flujo CHARTER con `GET /api/health` + su test + su documentac
 - Claude Code web puede nombrar la rama `claude/…` en vez de `chr/T-001-health`: la revisión lo detecta.
 - `npm audit` falla en la base (D-3): no confundirlo con una falla de la tarea.
 
-- **Oleada 2 (E2, comprometida 2026-10-01):** US3 y US4. El PO dictará las tareas con `tareas: 3`.
+- **Oleada 2 (E2, comprometida 2026-10-01):** T-003 (US3, SENIOR-3, pre-revisa RAPIDO), T-004 (US4, SENIOR-1, pre-revisa SENIOR-3) y T-005 (docs + `.env.example`, SENIOR-2, pre-revisa RAPIDO), en paralelo desde `main`. Dictadas por el PO (`tareas: 3`), liberadas el 2026-09-24.
+
+### Análisis de consistencia (oleada 2)
+- **Archivos:** T-003 = `app.js`, `tests/http-hardening.test.js`; T-004 = `routes/healthRoutes.js`, `tests/health-uptime.test.js`; T-005 = `README.md`, `.env.example`. Sin solapamiento.
+- **Contratos:** C-003 (T-003), C-004 (T-004), C-005 (T-005, que documenta C-003 y C-004 textualmente). T-005 va en paralelo contra los contratos; una diferencia con lo integrado es cambio a T-005 (PO).
+- **Interacción T-003 ↔ T-004:** el 404 de T-003 va después de todos los routers, y la ruta de T-004 vive dentro del router ya montado: funcionan en cualquier orden de merge. T-004 no prueba headers ni 404.
+- **Trazabilidad:** RF-004, RF-005, RF-006 → T-003; RF-008 → T-004; RF-007, RF-009 → T-005.
+- **Seguridad:** T-003 y T-005 `sensible` (casos de abuso en la tarjeta, revisión de seguridad del LIDER); T-004 `normal`. Ninguna sensible va a RAPIDO como autor.
+- **WIP:** una tarea por desarrollador (SENIOR-1, SENIOR-2, SENIOR-3). SENIOR-3 también pre-revisa T-004: la pre-revisión no cuenta como WIP.
+- **Orden de merge sugerido:** T-003 → T-004 → T-005 (la documentación al final, después de verificarla contra lo integrado).
 
 ## Backlog (recortado o diferido)
 | Ítem | Épica | Tipo de valor | Motivo | Origen |
