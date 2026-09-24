@@ -36,5 +36,5 @@ _Actualizado: 2026-09-24 por LIDER_
 ## Para el PO ahora
 - **Activar:** nadie
 - **Merge pendiente:** ninguno
-- **Decisiones pendientes:** `entregué E2` cuando la des por entregada; siguiente paso: E3 o cerrar la prueba
+- **Decisiones pendientes:** `el cliente aceptó E2` cuando lo acepte; siguiente paso: E3 o cerrar la prueba
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

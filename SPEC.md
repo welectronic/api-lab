@@ -9,7 +9,7 @@ Quien opera o prueba la API (el PO, un balanceador, un monitor) necesita saber s
 | ID | Épica | Comprometida | Entregada | Aceptada |
 |---|---|---|---|---|
 | E1 | Prueba del flujo CHARTER: endpoint de salud (US1, US2) | — | — | — |
-| E2 | Endurecimiento y observabilidad (US3, US4) | 2026-10-01 | — | — |
+| E2 | Endurecimiento y observabilidad (US3, US4) | 2026-10-01 | 2026-09-24 | — |
 | E3 | Seguridad continua (backlog de `PLAN.md`) | — | — | — |
 
 - **E1** se registró después de terminada para que sus historias tengan épica; sus tareas se integraron el 2026-09-24. `Entregada` se llena cuando el PO diga `entregué E1`.

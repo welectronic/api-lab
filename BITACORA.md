@@ -2,6 +2,10 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (12)
+- **Pasó:** el PO dio E2 por entregada: `Entregada` = 2026-09-24, 7 días antes de lo comprometido (2026-10-01). `main` @ `b291042`. Desde hoy, los ajustes y bugs de E2 cuentan como retrabajo del cliente (garantía).
+- **Sigue:** `el cliente aceptó E2`; E3 o cerrar la prueba.
+
 ## 2026-09-24 (11)
 - **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO (`kit/VERSION` (d)). Las 3 propuestas al kit del tablero (`--no-track` + `push -u`, activación `<ROL> T-XXX`, ROSTER por modelo) quedan `aplicada` según el CHANGELOG.
 - **Nota para próximas tareas:** la pre-revisión ahora es obligatoria en M o `sensible` y la activa el LIDER; activación `CHARTER: api-lab <ROL> T-XXX`.
