@@ -9,7 +9,7 @@ En GitHub: *Settings → Rules → Rulesets* (o *Branches → Branch protection 
 - [ ] Integrar solo por Pull Request (sin push directo).
 - [ ] Force push bloqueado.
 - [ ] Borrado de la rama bloqueado.
-- [ ] Solo el PO puede saltarse la regla (*bypass*), o nadie.
+- [ ] Solo el PO puede saltarse la regla (*bypass*), o nadie. **Si las instancias de IA usan la misma cuenta del PO** (caso típico: Claude Code web o un IDE local con la sesión de GitHub del PO), el bypass debe ser **solo para pull requests** (*For pull requests only*), nunca *Always allow*: si no, los agentes también pueden empujar directo a la base.
 - [ ] Si hay CI: los checks deben pasar antes de integrar.
 
 ## 2. Protección de la rama de coordinación
@@ -27,6 +27,10 @@ En GitHub: *Settings → Rules → Rulesets* (o *Branches → Branch protection 
 
 ## 5. Prueba de humo (obligatoria)
 Con la protección activa, el PO pide a cualquier instancia un push de prueba directo a la rama base. **Debe fallar** con un error de GitHub. Si no falla, la protección no está bien configurada y no se continúa.
+
+- Un mensaje de *"Bypassed rule violations"* **no es un rechazo**: el push entró. Pasa cuando la cuenta que empuja está en la *bypass list* con *Always allow*.
+- Confirmarlo siempre en el remoto, no solo en el mensaje: después de la prueba, `git fetch` y `git log -1 origin/<base>` no deben mostrar el commit de prueba. El LIDER lo verifica antes de liberar la primera oleada.
+- Si el PO decide seguir con el bypass abierto, se registra como excepción en `DECISIONES.md` con el riesgo aceptado, y el LIDER comprueba en cada revisión que la base no cambió fuera de los merges del PO.
 
 ## 6. Registro
 El LIDER anota en `PROYECTO.md`:

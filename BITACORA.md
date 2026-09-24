@@ -2,6 +2,11 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (6)
+- **Estado:** prueba cerrada; kit ajustado con lo aprendido.
+- **Pasó:** a pedido del PO, el LIDER actualizó CHARTER-DEV: `PREPARACION-REPO.md` (bypass solo para PR si los agentes usan la cuenta del PO; "Bypassed" no es rechazo; confirmar en el remoto), `desarrollador.md` + skill + zip (verificar el modelo contra el ROSTER, worktree propio si el clon es compartido, reportes con la herramienta de edición en UTF-8 sin BOM), `configuracion-plataformas.md` y `guias/PRUEBA-API-LAB.md`. Copiado `PREPARACION-REPO.md` a `kit/`; `kit/VERSION` = 2026-09-24 (b).
+- **Sigue:** el PO reinstala la skill de desarrollador en Claude (Pro) y Antigravity.
+
 ## 2026-09-24 (5)
 - **Estado:** prueba cerrada. T-001 y T-002 `integrada`.
 - **Pasó:** el PO integró por PR #2 (T-001) y #3 (T-002), en orden. `main` = `99531f4`; ambos commits de tarea son ancestros; `main` sin archivos de coordinación.
