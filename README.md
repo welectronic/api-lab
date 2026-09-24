@@ -16,11 +16,16 @@ API REST sencilla hecha con Node.js y Express que combina dos bases de datos:
 npm install
 ```
 
-Crea un archivo `.env` en la raíz:
+Copia el archivo `.env.example` a `.env` y completa los valores:
 
+Para bash:
+```bash
+cp .env.example .env
 ```
-MONGO_URI=tu_cadena_de_conexion_a_mongodb
-PORT=3000
+
+Para PowerShell:
+```powershell
+Copy-Item .env.example .env
 ```
 
 ## Uso
@@ -33,6 +38,17 @@ npm test       # corre los tests (no requiere bases de datos)
 
 El servidor queda disponible en `http://localhost:3000`.
 
+## Seguridad HTTP
+
+- Cabeceras de protección en toda respuesta: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
+- No se envía la cabecera `X-Powered-By`.
+- Límite de `100kb` para el cuerpo de las peticiones (JSON y urlencoded), respondiendo `413` si se supera.
+
+Cuerpos de error estándar (`Content-Type: application/json; charset=utf-8`):
+- Ruta inexistente (cualquier método) → 404 `{"error":"Recurso no encontrado"}`
+- JSON malformado (err.type 'entity.parse.failed') → 400 `{"error":"JSON malformado"}`
+- Body > 100 kb (err.type 'entity.too.large') → 413 `{"error":"Cuerpo demasiado grande"}`
+
 ## Endpoints
 
 ### Salud
@@ -40,12 +56,21 @@ El servidor queda disponible en `http://localhost:3000`.
 | Método | Ruta                          | Descripción                     |
 |--------|-------------------------------|---------------------------------|
 | GET    | `/api/health`                 | Comprueba el estado de la API   |
+| GET    | `/api/health/uptime`          | Obtiene el tiempo de actividad  |
 
-Ejemplo de respuesta (200 OK):
+Ejemplo de respuesta de `/api/health` (200 OK):
 
 ```json
 {
   "status": "ok"
+}
+```
+
+Ejemplo de respuesta de `/api/health/uptime` (200 OK):
+
+```json
+{
+  "uptimeSeconds": 42
 }
 ```
 
