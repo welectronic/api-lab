@@ -1,14 +1,14 @@
 # Tablero
 
-_Actualizado: 2026-09-24 por LIDER (ronda 2 de T-003 y T-005, D-7)_
+_Actualizado: 2026-09-24 por LIDER (oleada 2 aprobada)_
 
 | Tarea | Título | Asignado | Pre-revisor | Oleada | Tipo valor | Estado | Ronda | Rama |
 |---|---|---|---|---|---|---|---|---|
 | T-001 | GET /api/health + test | SENIOR-1 | RAPIDO | 1 | desbloqueante | integrada | 1 | `chr/T-001-health` |
 | T-002 | Documentar /api/health en README | SENIOR-2 | ninguno | 1 | pulido | integrada | 1 | `chr/T-002-readme-health` |
-| T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | cambios_solicitados | 2 | `chr/T-003-http-hardening` |
+| T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | aprobada | 2 | `chr/T-003-http-hardening` |
 | T-004 | GET /api/health/uptime + test | SENIOR-1 | SENIOR-3 | 2 | nucleo | aprobada | 1 | `chr/T-004-uptime` |
-| T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | cambios_solicitados | 2 | `chr/T-005-docs-env` |
+| T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | aprobada (cierre LIDER) | 2 | `chr/T-005-docs-env` |
 
 ## Observaciones del proceso
 | Fecha | Observación | Origen |
@@ -23,6 +23,8 @@ _Actualizado: 2026-09-24 por LIDER (ronda 2 de T-003 y T-005, D-7)_
 | 2026-09-24 | Ninguna pre-revisión de la oleada 2 se hizo antes de `revisar` (RAPIDO y SENIOR-3 no se activaron) | oleada 2 |
 | 2026-09-24 | T-003 corrió en Claude Code web, no local; hora del reporte en UTC | T-003 |
 | 2026-09-24 | C-003 (LIDER) solo cubría 2 tipos de error de body: los demás filtran el stack. Hallazgo 1 de T-003-r1 | T-003 |
+| 2026-09-24 | SENIOR-2 hizo la ronda 2 de T-005 con la tarjeta `bloqueada`, 30 s antes de que el LIDER publicara D-7; faltó el 415. El LIDER terminó T-005 (ronda 3 no permitida). Tropiezo #4 | T-005 |
+| 2026-09-24 | Tampoco hubo pre-revisiones en la ronda 2: RAPIDO no se activó en toda la oleada | oleada 2 |
 
 ## Propuestas al kit (pendientes del PO)
 | Fecha | Propuesta | Propuesta por | Estado |
@@ -32,7 +34,7 @@ _Actualizado: 2026-09-24 por LIDER (ronda 2 de T-003 y T-005, D-7)_
 | 2026-09-24 | ROSTER: SENIOR-3 = "Claude Code (local o web)", o una fila aparte para web | SENIOR-3 (T-003) | pendiente |
 
 ## Para el PO ahora
-- **Activar:** SENIOR-3 (`CHARTER: api-lab T-003`) y SENIOR-2 (`CHARTER: api-lab T-005`), en paralelo. Con los reportes r2: RAPIDO pre-revisa T-003 y T-005; luego `CHARTER: api-lab revisar`
-- **Merge pendiente:** `chr/T-004-uptime` → `main` (aprobada, independiente)
-- **Decisiones pendientes:** ninguna
+- **Activar:** nadie
+- **Merge pendiente, en este orden:** `chr/T-003-http-hardening` → `chr/T-004-uptime` → `chr/T-005-docs-env` (a `main`). Luego `CHARTER: api-lab integré T-003, T-004, T-005`
+- **Decisiones pendientes:** ninguna. Opcional: las 3 propuestas al kit
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

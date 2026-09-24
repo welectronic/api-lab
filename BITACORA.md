@@ -2,6 +2,12 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (9)
+- **Estado:** oleada 2 aprobada completa (T-003 r2, T-004 r1, T-005 r2). Pendiente de merge del PO.
+- **Pasó:** T-003 r2 corrige el hallazgo 1 (A7–A9, fallan antes y pasan después). T-005 r2 se hizo con la tarjeta bloqueada, antes de publicarse D-7; quitó `err.type`, pero faltó el 415. Ronda 3 no permitida: la terminó el LIDER (`d2054ca`, solo `README.md`). Tropiezo #4. Ninguna pre-revisión en toda la oleada.
+- **Sigue:** el PO integra T-003 → T-004 → T-005 y avisa con `integré`; al integrar se cierra E2 con retro.
+- **Última verificación en verde:** `main` @ `99531f4` + `266818b` + `0516bdc` + `d2054ca` (worktree temporal, descartado): `npm ci && npm test` → `tests 15, pass 15, fail 0`, exit 0, Node 24.13.1. 400/413/415 en JSON con headers y sin stack. `origin/main` = `99531f4`.
+
 ## 2026-09-24 (8)
 - **Estado:** E2 especificada (US3 sensible, US4 normal; RF-004 a RF-009). E3 "Seguridad continua" en el backlog, sin fecha.
 - **Sigue:** el PO dicta las tareas de E2 con `CHARTER: api-lab tareas: 3`.
