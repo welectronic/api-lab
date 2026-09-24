@@ -7,6 +7,9 @@ estado: listo_para_revision | bloqueada
 rama: chr/T-XXX-<slug>
 commit: <hash corto del último commit>
 fecha: AAAA-MM-DD
+inicio: <AAAA-MM-DD HH:MM, al empezar (hora real del sistema)>
+fin: <AAAA-MM-DD HH:MM, al terminar>
+sesiones: 1
 ---
 
 # Reporte T-XXX — ronda N
@@ -18,6 +21,8 @@ fecha: AAAA-MM-DD
 - `<ruta>` — <creado/modificado y por qué>
 
 ## Evidencia de verificación (corrida DESPUÉS del último cambio)
+> Si la tarea es `correctivo`: pega primero la salida del test de regresión **fallando antes del arreglo** y luego pasando.
+
 ```
 $ <comando lint>
 <salida real, al menos las líneas de resumen y código de salida>
@@ -39,6 +44,9 @@ $ <comando tests>
 
 ## [POR ACLARAR] / bloqueos / propuestas
 - <duda + opciones A/B>
+
+## Propuestas al kit (opcional; no las apliques tú)
+- <cambio sugerido a la metodología, las skills o las plantillas>
 
 ## Propuesta de solución documentable (opcional)
 <problema no obvio que resolví y que conviene guardar en soluciones/>

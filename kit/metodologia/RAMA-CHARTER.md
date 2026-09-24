@@ -22,6 +22,8 @@ rama charter
 - La rama base y los PR quedan limpios: solo código.
 - El LIDER puede hacer push a `charter` sin tocar nunca la rama base.
 
+**Los datos comerciales (`CHARTER-DEV/comercial/`) nunca se copian a la rama ni a `kit/`.** Precios, presupuestos, tarifas y márgenes no se escriben en ningún archivo de `charter`.
+
 **CHARTER-DEV (OneDrive) sigue siendo la fuente maestra** del kit y de `soluciones/`. La rama lleva una copia que el LIDER actualiza cuando el kit cambia.
 
 ## Carpeta de trabajo: un worktree al lado del clon
@@ -68,7 +70,7 @@ Los configura el PO en la Fase 0, según [PREPARACION-REPO.md](PREPARACION-REPO.
 
 ## Actualizar el kit copiado
 
-Cuando cambie el kit maestro, el LIDER copia los archivos afectados a `kit/`, actualiza `kit/VERSION` y lo anota en `BITACORA.md`.
+Cuando el PO cambie el kit maestro y lo indique, el LIDER copia los archivos afectados a `kit/`, actualiza `kit/VERSION` y lo anota en `BITACORA.md`. Nunca modifica `kit/` por iniciativa propia.
 
 ## Si el repo se comparte
 

@@ -1,2 +1,3 @@
-2026-09-24 — copia desde CHARTER-DEV (ROSTER 2026-09-24). Estándares: seguridad (no hay estándar Node/Express en el kit).
-2026-09-24 (b) — actualizado metodologia/PREPARACION-REPO.md: bypass solo para PR y cómo leer la prueba de humo.
+2026-09-24 — copia inicial desde CHARTER-DEV.
+2026-09-24 (b) — PREPARACION-REPO.md (bypass solo para PR).
+2026-09-24 (c) — sincronización completa con el kit maestro al CHANGELOG del 2026-09-24 (formato de respuesta §10, gobierno del kit §11, Kanban §12, medición §13, SOLICITUDES.md, worktree por tarea, SENIOR-3, sin prueba de humo). Estándares: seguridad (no hay estándar Node/Express). Sin comercial/.

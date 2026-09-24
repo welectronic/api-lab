@@ -5,6 +5,9 @@ prerevisor: <TU-ID>
 commit_revisado: <hash>
 resultado: pasa_a_lider | devolver_al_autor
 fecha: AAAA-MM-DD
+inicio: <AAAA-MM-DD HH:MM, al empezar (hora real del sistema)>
+fin: <AAAA-MM-DD HH:MM, al terminar>
+sesiones: 1
 ---
 
 # Pre-revisión T-XXX — ronda N

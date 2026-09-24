@@ -22,12 +22,13 @@ Un proyecto puede tener su propio `ROSTER.md` en su carpeta; si existe, reemplaz
 | `SENIOR-1` | Claude (app o Claude Code) | Claude Opus | Pro | Mismo modelo, límites más bajos: solo tareas S/M |
 | `SENIOR-2` | Antigravity | Gemini 3.1 Pro (High) | Propia | Seleccionar el modelo antes de activar |
 | `RAPIDO` | Antigravity | Gemini 3.8 Flash (Medium) | Propia | Misma instalación que SENIOR-2, con otro modelo |
+| `SENIOR-3` | Claude Code local (sesión aparte de la del LIDER) | Claude Opus | Team (compartida con el LIDER) | Skill `charter-desarrollador` en `~/.claude/skills/`. Comparte cuota con el LIDER |
 
 ## Reglas del roster
 
 - Un rol puede quedar vacío. Sus tareas pasan al siguiente rol de la cadena de respaldo.
 - **Cadena de respaldo:** `RAPIDO → SENIOR-2 → SENIOR-1 → LIDER`.
 - Si una instancia se queda sin cuota, el PO avisa al LIDER con `CHARTER: <proyecto> sin cuota <ID>`. El LIDER reasigna sus tareas pendientes según la cadena.
-- Si se agrega una instancia nueva (otro IDE, otro modelo), se añade una fila con un ID nuevo (ej. `SENIOR-3`) y se le entrega `agentes/desarrollador.md`.
+- Si se agrega una instancia nueva (otro IDE, otro modelo u **otra sesión de la misma herramienta**), se añade una fila con un ID nuevo (ej. `SENIOR-3`, `RAPIDO-2`) y se le instala la skill del desarrollador. Un ID por sesión activa.
 
 _Última actualización: 2026-09-24_

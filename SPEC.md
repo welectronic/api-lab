@@ -1,13 +1,22 @@
 # Especificación — el QUÉ y el PORQUÉ
 
-Estado: aprobada (alcance dictado por el PO en el disparador) · Fecha: 2026-09-24
+Estado: E1 aprobada; E2 en aclaración · Fecha: 2026-09-24
 
 ## Problema y usuarios
 Quien opera o prueba la API (el PO, un balanceador, un monitor) no tiene forma de saber si el proceso está vivo sin tocar las bases de datos. Además, el repo no tiene tests. Esta iteración sirve sobre todo para **probar el flujo CHARTER** con un cambio mínimo.
 
+## Épicas
+| ID | Épica | Comprometida | Entregada | Aceptada |
+|---|---|---|---|---|
+| E1 | Prueba del flujo CHARTER: endpoint de salud (US1, US2) | — (sin fecha comprometida; T-001 y T-002 integradas el 2026-09-24) | — | — |
+| E2 | Endurecimiento y observabilidad | 2026-10-01 | — | — |
+
+- **E1** se registra en retrospectiva para que las historias existentes tengan épica. `Entregada` se llena cuando el PO diga `entregué E1`.
+- **E2** está comprometida sin alcance definido: `[POR ACLARAR: historias de E2]`. Candidatas desde el backlog de `PLAN.md`: dependencias vulnerables, gitleaks/Semgrep/CI, `database.sqlite` versionado, `err.message` expuesto. "Observabilidad" aún no tiene ningún ítem.
+
 ## Historias de usuario (priorizadas)
 
-### US1 — Comprobar que la API está viva (P1)
+### US1 — Comprobar que la API está viva (P1) [E1]
 Como operador, quiero consultar un endpoint de salud para saber si el servicio responde.
 
 - **Por qué esta prioridad:** es el cambio mínimo que ejercita todo el ciclo (rama, test, reporte, revisión, merge).
@@ -16,7 +25,7 @@ Como operador, quiero consultar un endpoint de salud para saber si el servicio r
   1. **Dado** el servicio en marcha, **cuando** hago `GET /api/health`, **entonces** recibo `200` con cuerpo JSON `{"status":"ok"}`.
   2. **Dado** que MongoDB y SQLite no están disponibles, **cuando** corro los tests, **entonces** el test de salud pasa igual.
 
-### US2 — Saber que existe el endpoint (P2)
+### US2 — Saber que existe el endpoint (P2) [E1]
 Como desarrollador que llega al repo, quiero ver el endpoint de salud documentado en el README junto a los demás.
 
 - **Prueba independiente:** el README lista `GET /api/health` en una tabla de endpoints con un ejemplo de respuesta.

@@ -60,3 +60,20 @@ El PO revisa las tareas `aprobada`, hace merge o PR y avisa: `CHARTER: <proyecto
 ## Paralelismo: oleadas
 
 Las tareas se agrupan en oleadas. Las de una misma oleada no comparten archivos y pueden correr en paralelo. La siguiente oleada empieza cuando la anterior está integrada o sus contratos están estables.
+
+## Escalar a N desarrolladores en paralelo
+
+No hay un límite fijo: cada desarrollador es un ID en `ROSTER.md` (`SENIOR-3`, `RAPIDO-2`, …). Varias sesiones de la misma herramienta cuentan como desarrolladores distintos si cada una tiene su propio ID. Ejemplo: una sesión de Claude Code con la skill del desarrollador puede ser `SENIOR-3`, aunque use la misma cuenta que el LIDER.
+
+Condiciones para que funcione:
+1. **Un ID por sesión activa.** Dos sesiones nunca comparten ID, porque el ID define qué tareas toma cada una.
+2. **Una carpeta por tarea** (worktree `../<repo>.T-XXX`). Así varias instancias en el mismo equipo no se pisan.
+3. **Tareas de una oleada sin archivos compartidos.** Si dos tareas necesitan tocar el mismo archivo, se ordenan con `depende_de` o una sola tarea asume ese archivo.
+4. **Contratos definidos antes de liberar la oleada.** Una tarea que documenta o consume lo que produce otra trabaja contra el contrato, no contra el código.
+5. **La rama `charter` aguanta la concurrencia** porque cada archivo tiene un solo dueño y todos hacen `pull --rebase` antes del push.
+
+Límites prácticos:
+- **Revisión:** el LIDER revisa todo, y cada desarrollador extra es más diffs que revisar. Conviene usar pre-revisores para filtrar.
+- **Activación:** el PO activa cada sesión a mano. Una oleada de 3 a 5 tareas es manejable.
+- **Integración:** el PO integra en el orden que indique el LIDER, y las ramas que queden atrás se actualizan desde la base antes del merge.
+- **Cuota:** varias sesiones de la misma cuenta comparten su límite de uso.

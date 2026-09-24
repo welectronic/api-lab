@@ -49,6 +49,7 @@ Si necesitas cambiar algo que no es tuyo, escríbelo como propuesta en tu report
 
 ## 5. Mientras desarrollas
 
+- **Cada tarea en su propia carpeta (worktree):** `git worktree add ../<repo>.T-XXX -b <rama> origin/<rama_origen>` (o sin `-b` si la rama ya existe). Nunca cambies de rama en el clon principal: otras instancias pueden estar usándolo en el mismo equipo. En entornos web con sandbox propio, la sesión ya es tu carpeta aislada.
 - Trabaja solo en la rama de la tarea (`chr/T-XXX-<slug>`).
 - Toca solo los archivos permitidos. Si necesitas otro, detente y repórtalo como bloqueo.
 - Respeta los contratos al pie de la letra. Si un contrato está mal, no lo cambies: repórtalo.
@@ -77,3 +78,91 @@ Si algo es ambiguo, contradictorio o requiere una decisión: **no supongas**. M�
 - Cambiar alcance, spec, principios, arquitectura o contratos sin aprobación.
 - Editar archivos de otro dueño.
 - Hacer merge entre `charter` y cualquier rama de código, o escribir secretos en `charter`.
+
+## 10. Formato de respuesta al PO (obligatorio)
+
+El detalle vive en los archivos (revisiones, reportes, tablero). En el chat va solo lo que el PO necesita para decidir y actuar.
+
+**LIDER** (máximo ~12 líneas):
+```
+Resultado:
+- T-001 ✅ aprobada
+- T-002 ❌ cambios: <motivo en ≤10 palabras>
+Decisión requerida: <solo si existe; pregunta cerrada + tu recomendación>
+Para el PO ahora:
+1. <acción>
+2. <acción>
+<comandos, si hay, en un solo bloque>
+```
+
+**Desarrollador** (máximo 3 líneas): tarea, estado y commit.
+
+**No va en la respuesta:**
+- La narración del proceso ("leo los reportes", "corro la verificación…").
+- La evidencia: va en la revisión o el reporte.
+- Salidas esperadas de comandos.
+- El estado de la Fase 0, salvo que haya cambiado.
+- Lo que ya se dijo antes.
+- Las observaciones del proceso: van al tablero. En la respuesta solo se indica "N observaciones nuevas en el tablero".
+
+## 11. Gobierno del kit
+
+- **Nadie** (ni el LIDER ni los desarrolladores) modifica por iniciativa propia las skills, las instrucciones de los agentes, la carpeta `kit/` de la rama ni el kit maestro.
+- **Propuestas:** cada desarrollador las escribe en su reporte, en la sección *Propuestas al kit*. El LIDER las consolida en `TABLERO.md`, en la sección *Propuestas al kit (pendientes del PO)*, sin desarrollarlas ni gastar tiempo en ellas.
+- **El PO decide** y las aplica en una sesión de mantenimiento del kit, aparte del proyecto.
+- **Única excepción:** el LIDER actualiza `kit/` en la rama para sincronizarla con el kit maestro, cuando el PO lo indique.
+
+## 12. Kanban: flujo, WIP y "hecho"
+
+El tablero (`CHARTER-DEV/tablero/tablero.html`) se construye solo a partir de los archivos de la rama `charter`. Para que funcione, los campos deben estar al día.
+
+**Columnas y de dónde salen:**
+| Columna | Se calcula así |
+|---|---|
+| Backlog | Historias de `SPEC.md` sin ninguna tarea |
+| Lista | Tarea con `estado: pendiente` |
+| En progreso | `en_progreso` o `cambios_solicitados` |
+| En revisión | Último reporte `listo_para_revision` sin revisión de esa ronda |
+| Aprobada | Última revisión `APROBADA`, todavía sin integrar |
+| Integrada | `estado: integrada` |
+
+Una tarea `bloqueada` se muestra con una alerta en su columna.
+
+**Definición de hecho:** una tarea está **hecha** solo cuando está `integrada` en la rama base. Aprobada no es hecha.
+
+**Límites de trabajo en curso (WIP):**
+- Una tarea en progreso por desarrollador. El LIDER libera la siguiente tarea de un desarrollador solo cuando la anterior pasa a revisión.
+- Máximo 5 tareas en revisión. Si se llega al límite, el LIDER revisa antes de liberar más.
+
+**Campos que mantiene el LIDER:**
+- `epica` e `historia` en cada tarea.
+- `liberada` (fecha en que pasa a `en_progreso`).
+- `integrada` (fecha en que el PO confirma el merge).
+- Encabezados de historias en `SPEC.md` con el formato `### USn — título (Pn) [En]`.
+
+**Carril urgente:** una tarea con `urgente: si` (bug de severidad crítica) se libera de inmediato, va primero en su columna y no cuenta para el límite de WIP. Solo puede haber una urgente a la vez por proyecto. El PO la integra apenas quede aprobada.
+
+**Bugs y ajustes** (`SOLICITUDES.md` C y D): se trabajan como tareas con `tipo: correctivo` o `tipo: ajuste`. El tablero muestra los bugs abiertos por severidad, los días hasta resolver (de `creada` a `integrada`) y los **escapes**: bugs con `causado_por` que apuntan a tareas ya integradas, agrupados por el desarrollador que hizo esa tarea.
+
+**Retro:** al cerrar cada oleada, 3 líneas en `BITACORA.md` (funcionó / no funcionó / propuesta al kit).
+
+## 13. Medición del negocio (agencia)
+
+El valor para la agencia es **entregar lo comprometido, a tiempo, sin retrabajo y con un margen conocido**. El tablero lo calcula con estos datos:
+
+| Qué se mide | De dónde sale | Quién lo registra |
+|---|---|---|
+| **Esfuerzo de IA** | `inicio`, `fin` y `sesiones` de cada reporte, pre-revisión y revisión | Cada desarrollador y el LIDER, con la hora real del sistema |
+| **Esfuerzo del PO** | `esfuerzo_po_horas` de la tarea | El LIDER, cuando el PO lo dice (`integré T-004 (30 min)`) |
+| **Precisión de estimación** | Horas reales por talla contra la referencia: S ≈ 2 h, M ≈ 6 h de IA | Automático |
+| **Compromisos** | Columnas `Comprometida` y `Entregada` de la tabla de épicas en `SPEC.md` | El LIDER: comprometida al planear; entregada cuando el PO dice `entregué E1` |
+| **Pronóstico** | Ritmo real (tareas integradas por semana en las últimas 4) y lo que falta de cada épica | Automático |
+| **Antigüedad** | Días en progreso (desde `liberada`) o en revisión (desde el último reporte) | Automático; alerta a los 3 y 2 días |
+| **Aceptación del cliente** | Columna `Aceptada` de la épica, cuando el PO dice `el cliente aceptó E1` | El LIDER |
+| **Retrabajo del cliente** | Ajustes y bugs creados después de la fecha `Entregada` de su épica (garantía) | Automático |
+| **Capacidad** | Ritmo por desarrollador, carga pendiente y líneas `AAAA-MM-DD sin cuota <ID>` en `BITACORA.md` | El LIDER anota cada `sin cuota` |
+| **Costo y margen** | Horas × costo de referencia, contra precio y presupuesto de `CHARTER-DEV/comercial/` | El PO; nunca en la rama `charter` |
+
+**Informe al cliente:** la pestaña *Informe* del tablero arma el resumen del periodo (entregado, aceptado, bugs resueltos, ajustes y próximos compromisos) sin costos, nombres de instancias ni datos internos, listo para imprimir o guardar como PDF. No consume tokens.
+
+**Mide lo que decide:** si un dato no cambia una decisión (cotizar, reasignar, renegociar una fecha), no se agrega.

@@ -5,6 +5,9 @@ revisor: LIDER
 commit_revisado: <hash>
 veredicto: APROBADA | CAMBIOS_SOLICITADOS | REASIGNADA
 fecha: AAAA-MM-DD
+inicio: <AAAA-MM-DD HH:MM, al empezar (hora real del sistema)>
+fin: <AAAA-MM-DD HH:MM, al terminar>
+sesiones: 1
 ---
 
 # Revisión T-XXX — ronda N

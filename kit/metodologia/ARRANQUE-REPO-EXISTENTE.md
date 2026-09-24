@@ -5,7 +5,7 @@ Disparador al LIDER: `CHARTER: repo existente <nombre> <ruta local del repo>. Ob
 Todas las instancias ya tienen su propio clon del repo. No se vuelve a clonar: el LIDER lee su clon local, y cada tarea indica a los desarrolladores la rama base y la rama que deben crear.
 
 ## Fase 0 — Preparación del repo (PO) · puerta obligatoria
-El PO completa [PREPARACION-REPO.md](PREPARACION-REPO.md) sobre el repo existente (protecciones, accesos, token del LIDER, prueba de humo). En repos existentes es frecuente que la rama base **no** esté protegida: se verifica siempre. **Sin esta confirmación no se sigue.**
+El PO completa [PREPARACION-REPO.md](PREPARACION-REPO.md) sobre el repo existente (protecciones, accesos, token del LIDER). En repos existentes es frecuente que la rama base **no** esté protegida: se verifica siempre. **Sin esta confirmación no se sigue.**
 
 ## Fase 0b — Levantamiento (LIDER + PO)
 1. Crear la **rama huérfana `charter`** en el repo (ver `RAMA-CHARTER.md`) con el contenido de `proyectos/_PLANTILLA/` y la carpeta `kit/`, y llenar `PROYECTO.md`. Registrar el proyecto en `proyectos/INDICE.md` de CHARTER-DEV.

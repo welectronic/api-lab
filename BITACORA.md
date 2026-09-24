@@ -2,6 +2,12 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (7)
+- **Estado:** E1 integrada; E2 comprometida sin alcance.
+- **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO (`kit/VERSION` = 2026-09-24 (c)). `SPEC.md` con tabla de épicas: E1 (retroactiva, US1–US2) y E2 "Endurecimiento y observabilidad", comprometida para 2026-10-01. Tareas con `tipo`, `epica`, `liberada`, `integrada`. Tablero con observaciones y propuestas al kit.
+- **Retro oleada 1:** funcionó: tareas con contrato y "falla cuando", cero conflictos, nadie hizo PR ni push a `main`. No funcionó: bypass de admin, modelo equivocado en SENIOR-2, reporte dañado por PowerShell. Propuesta al kit: ya aplicada por el PO (CHANGELOG 2026-09-24).
+- **Sigue:** el PO define el alcance de E2 (`requerimiento:`).
+
 ## 2026-09-24 (6)
 - **Estado:** prueba cerrada; kit ajustado con lo aprendido.
 - **Pasó:** a pedido del PO, el LIDER actualizó CHARTER-DEV: `PREPARACION-REPO.md` (bypass solo para PR si los agentes usan la cuenta del PO; "Bypassed" no es rechazo; confirmar en el remoto), `desarrollador.md` + skill + zip (verificar el modelo contra el ROSTER, worktree propio si el clon es compartido, reportes con la herramienta de edición en UTF-8 sin BOM), `configuracion-plataformas.md` y `guias/PRUEBA-API-LAB.md`. Copiado `PREPARACION-REPO.md` a `kit/`; `kit/VERSION` = 2026-09-24 (b).

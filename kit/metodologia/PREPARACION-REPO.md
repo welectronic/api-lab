@@ -16,6 +16,10 @@ En GitHub: *Settings → Rules → Rulesets* (o *Branches → Branch protection 
 - [ ] Regla para la rama de coordinación: force push y borrado bloqueados. El push normal queda permitido.
 
 ## 3. Acceso de cada instancia
+
+> **Causa raíz a tener presente:** GitHub no distingue a las instancias entre sí si todas usan la cuenta del PO (sesión de GitHub en Claude Code web, credencial de Git en un IDE local). Para GitHub, cada push de un agente es un push del PO. Por eso la protección de la base depende de que el bypass esté en modo *For pull requests only* (§1).
+> **Mejor práctica, cuando el proyecto lo justifique:** dar a las instancias una identidad propia, sin permisos de bypass, por ejemplo una cuenta de GitHub separada para los agentes o un token *fine-grained* por instancia. Así las reglas aplican sin excepciones.
+
 - [ ] Cada instancia accede con permiso de **escritura** (write), nunca de administrador.
 - [ ] Instancias web (ej. Claude Code en la web): la app de GitHub autorizada **solo para los repos del proyecto**, no para toda la cuenta.
 - [ ] **Credencial del LIDER:** token *fine-grained* limitado a **este repo**, permiso *Contents: Read and write*, con fecha de vencimiento. Se entrega al LIDER por un canal seguro y **nunca** se guarda en CHARTER-DEV, en el repo ni en la rama de coordinación.
@@ -25,19 +29,11 @@ En GitHub: *Settings → Rules → Rulesets* (o *Branches → Branch protection 
 - [ ] *Dependabot alerts* activado.
 - [ ] Repo privado, salvo decisión explícita del PO.
 
-## 5. Prueba de humo (obligatoria)
-Con la protección activa, el PO pide a cualquier instancia un push de prueba directo a la rama base. **Debe fallar** con un error de GitHub. Si no falla, la protección no está bien configurada y no se continúa.
-
-- Un mensaje de *"Bypassed rule violations"* **no es un rechazo**: el push entró. Pasa cuando la cuenta que empuja está en la *bypass list* con *Always allow*.
-- Confirmarlo siempre en el remoto, no solo en el mensaje: después de la prueba, `git fetch` y `git log -1 origin/<base>` no deben mostrar el commit de prueba. El LIDER lo verifica antes de liberar la primera oleada.
-- Si el PO decide seguir con el bypass abierto, se registra como excepción en `DECISIONES.md` con el riesgo aceptado, y el LIDER comprueba en cada revisión que la base no cambió fuera de los merges del PO.
-
-## 6. Registro
+## 5. Registro
 El LIDER anota en `PROYECTO.md`:
 ```
 ## Preparación del repo
 - Confirmada por el PO: AAAA-MM-DD
-- Prueba de humo (push a la base rechazado): OK / FALLA
 - Token del LIDER vence: AAAA-MM-DD
 ```
 

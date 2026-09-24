@@ -7,9 +7,22 @@ _Actualizado: 2026-09-24 por LIDER_
 | T-001 | GET /api/health + test | SENIOR-1 | RAPIDO | 1 | desbloqueante | integrada | 1 | `chr/T-001-health` |
 | T-002 | Documentar /api/health en README | SENIOR-2 | ninguno | 1 | pulido | integrada | 1 | `chr/T-002-readme-health` |
 
+## Observaciones del proceso
+| Fecha | Observación | Origen |
+|---|---|---|
+| 2026-09-24 | La prueba de humo pasó por el bypass de admin; se siguió con la excepción D-5 | Fase 0 |
+| 2026-09-24 | RAPIDO no pre-revisó T-001 (se pidió la revisión antes) | T-001 |
+| 2026-09-24 | T-002 se hizo con Gemini Flash en lugar de Gemini 3.1 Pro (High) | T-002 |
+| 2026-09-24 | El reporte de T-002 llegó con escapes de PowerShell y BOM | T-002 |
+| 2026-09-24 | Antigravity cambió de rama el clon del PO | T-002 |
+| 2026-09-24 | E2 comprometida para 2026-10-01 sin historias definidas | SPEC |
+
+## Propuestas al kit (pendientes del PO)
+| Fecha | Propuesta | Propuesta por | Estado |
+|---|---|---|---|
+
 ## Para el PO ahora
-- **Activar:** nadie; prueba cerrada (oleada 1 integrada, PR #2 y #3, `main` @ `99531f4`)
+- **Activar:** nadie
 - **Merge pendiente:** ninguno
-- **Limpieza opcional:** borrar en GitHub las ramas `chr/T-001-health` y `chr/T-002-readme-health`
-- **Decisiones pendientes:** modelo usado en T-002 (revisión T-002 r1, hallazgo 1)
-- **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO; control solo por protocolo
+- **Decisiones pendientes:** alcance de E2 (comprometida 2026-10-01); modelo usado en T-002
+- **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

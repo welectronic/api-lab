@@ -3,7 +3,7 @@
 Disparador al LIDER: `CHARTER: nuevo proyecto <nombre>. <descripción de la idea>`
 
 ## Fase 0 — Preparación del repo (PO) · puerta obligatoria
-El PO crea el repo, cada instancia lo clona una vez y el PO completa [PREPARACION-REPO.md](PREPARACION-REPO.md), incluida la prueba de humo. **Sin esta confirmación no se sigue.**
+El PO crea el repo, cada instancia lo clona una vez y el PO completa [PREPARACION-REPO.md](PREPARACION-REPO.md). **Sin esta confirmación no se sigue.**
 
 ## Fase 0b — Levantamiento (LIDER + PO)
 1. Crear la **rama huérfana `charter`** en el repo (ver `RAMA-CHARTER.md`) con el contenido de `proyectos/_PLANTILLA/` y la carpeta `kit/` (ROSTER, metodología, plantillas, `estandares/seguridad.md` y los estándares del stack con sus configs). Registrar el proyecto en `proyectos/INDICE.md` de CHARTER-DEV.
