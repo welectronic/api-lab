@@ -27,15 +27,18 @@ Todo en `app.js`, con Express nativo (sin dependencias):
 3. Parsers con límite: `express.json({ limit: '100kb' })` y `express.urlencoded({ extended: true, limit: '100kb' })`. No se agregan parsers nuevos.
 4. Después de montar **todos** los routers: manejador 404 y luego manejador de errores de body.
 
-Cuerpos de error (exactos, `Content-Type: application/json; charset=utf-8`):
+Cuerpos de error (exactos, `Content-Type: application/json; charset=utf-8`). **Ampliado el 2026-09-24 (D-7):** cubre todo error de body-parser, no solo dos tipos.
 ```
-Ruta inexistente (cualquier método)      → 404 {"error":"Recurso no encontrado"}
-JSON malformado (err.type 'entity.parse.failed') → 400 {"error":"JSON malformado"}
-Body > 100 kb (err.type 'entity.too.large')      → 413 {"error":"Cuerpo demasiado grande"}
+Ruta inexistente (cualquier método)                → 404 {"error":"Recurso no encontrado"}
+Error de body-parser: typeof err.type === 'string' y 400 <= err.status <= 499, se responde con err.status:
+  400 y err.type === 'entity.parse.failed'         → 400 {"error":"JSON malformado"}
+  413 (entity.too.large, parameters.too.many)      → 413 {"error":"Cuerpo demasiado grande"}
+  415 (encoding o charset no soportado)            → 415 {"error":"Tipo de contenido no soportado"}
+  cualquier otro 4xx de body                       → err.status {"error":"Petición inválida"}
 ```
-- El cuerpo nunca incluye stack, `err.message`, la ruta pedida ni nombres de archivos.
-- Cualquier otro error sigue su camino con `next(err)`: dejar de exponer `err.message` en general es de E3.
-- Los tres casos llevan los headers del punto 2 y no llevan `X-Powered-By`.
+- El cuerpo nunca incluye stack, `err.message`, `err.type`, la ruta pedida ni nombres de archivos o librerías.
+- Cualquier otro error (sin `err.type` de body-parser, o 5xx) sigue su camino con `next(err)`: dejar de exponer `err.message` en general es de E3.
+- Todos los casos llevan los headers del punto 2 y no llevan `X-Powered-By`.
 
 ### C-004 — `GET /api/health/uptime` (US4, T-004)
 ```
@@ -48,7 +51,7 @@ GET /api/health/uptime
 - Sin BD, sin `async`, sin otros campos.
 
 ### C-005 — Documentación y `.env.example` (US3, US4, T-005)
-- `README.md` documenta C-003 y C-004 **tal como están escritos aquí** (headers, límite, los tres cuerpos de error, el endpoint de uptime con ejemplo).
+- `README.md` documenta C-003 y C-004: headers, límite, **status y cuerpo** de cada error de C-003 con una descripción para usuarios, y el endpoint de uptime con ejemplo. **No** copia `err.type`, `err.status` ni nombres de librerías: son notas de implementación.
 - `.env.example` en la raíz, con exactamente estas claves y valores de marcador:
 ```
 MONGO_URI=mongodb+srv://<usuario>:<password>@<cluster>/<base>

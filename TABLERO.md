@@ -1,14 +1,14 @@
 # Tablero
 
-_Actualizado: 2026-09-24 por LIDER (revisión r1 de la oleada 2)_
+_Actualizado: 2026-09-24 por LIDER (ronda 2 de T-003 y T-005, D-7)_
 
 | Tarea | Título | Asignado | Pre-revisor | Oleada | Tipo valor | Estado | Ronda | Rama |
 |---|---|---|---|---|---|---|---|---|
 | T-001 | GET /api/health + test | SENIOR-1 | RAPIDO | 1 | desbloqueante | integrada | 1 | `chr/T-001-health` |
 | T-002 | Documentar /api/health en README | SENIOR-2 | ninguno | 1 | pulido | integrada | 1 | `chr/T-002-readme-health` |
-| T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | bloqueada (decisión PO) | 1 | `chr/T-003-http-hardening` |
+| T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | cambios_solicitados | 2 | `chr/T-003-http-hardening` |
 | T-004 | GET /api/health/uptime + test | SENIOR-1 | SENIOR-3 | 2 | nucleo | aprobada | 1 | `chr/T-004-uptime` |
-| T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | bloqueada (decisión PO) | 1 | `chr/T-005-docs-env` |
+| T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | cambios_solicitados | 2 | `chr/T-005-docs-env` |
 
 ## Observaciones del proceso
 | Fecha | Observación | Origen |
@@ -32,7 +32,7 @@ _Actualizado: 2026-09-24 por LIDER (revisión r1 de la oleada 2)_
 | 2026-09-24 | ROSTER: SENIOR-3 = "Claude Code (local o web)", o una fila aparte para web | SENIOR-3 (T-003) | pendiente |
 
 ## Para el PO ahora
-- **Activar:** nadie hasta la decisión
+- **Activar:** SENIOR-3 (`CHARTER: api-lab T-003`) y SENIOR-2 (`CHARTER: api-lab T-005`), en paralelo. Con los reportes r2: RAPIDO pre-revisa T-003 y T-005; luego `CHARTER: api-lab revisar`
 - **Merge pendiente:** `chr/T-004-uptime` → `main` (aprobada, independiente)
-- **Decisiones pendientes:** hallazgo 1 de T-003-r1 (stack en errores de body no cubiertos): **A** ronda 2 de T-003 + T-005 (recomendada) o **B** diferir a E3 por escrito (D-7)
+- **Decisiones pendientes:** ninguna
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

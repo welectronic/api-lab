@@ -6,6 +6,11 @@ Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 - **Estado:** E2 especificada (US3 sensible, US4 normal; RF-004 a RF-009). E3 "Seguridad continua" en el backlog, sin fecha.
 - **Sigue:** el PO dicta las tareas de E2 con `CHARTER: api-lab tareas: 3`.
 
+## 2026-09-24 (8)
+- **Estado:** ronda 2 liberada para T-003 y T-005 (`cambios_solicitados`). T-004 aprobada, pendiente de merge.
+- **Decidido:** D-7 (PO eligió A): C-003 ampliado a todo error 4xx de body-parser, con 415 `Tipo de contenido no soportado` y 4xx genérico `Petición inválida`. US3 escenario 8 y RF-005 actualizados. C-005: el README no copia notas de implementación.
+- **Sigue:** SENIOR-3 (T-003 r2, casos A7–A9) y SENIOR-2 (T-005 r2) en paralelo; RAPIDO pre-revisa las dos; luego `revisar`. Es la última ronda permitida para ambas.
+
 ## 2026-09-24 (7)
 - **Estado:** E1 integrada; E2 comprometida sin alcance.
 - **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO (`kit/VERSION` = 2026-09-24 (c)). `SPEC.md` con tabla de épicas: E1 (retroactiva, US1–US2) y E2 "Endurecimiento y observabilidad", comprometida para 2026-10-01. Tareas con `tipo`, `epica`, `liberada`, `integrada`. Tablero con observaciones y propuestas al kit.

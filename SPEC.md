@@ -46,6 +46,7 @@ Como responsable de una API pública, quiero que el servicio no revele su tecnol
   5. **Dado** que llego al repo, **cuando** leo el README, **entonces** encuentro los headers que envía la API, el límite de 100 kb con su `413`, el formato del `404` y cómo crear `.env` a partir de `.env.example`.
   6. **Dado** el repo, **cuando** abro `.env.example`, **entonces** contiene `MONGO_URI` y `PORT` sin valores reales.
   7. **Dado** un `POST` con JSON malformado, **cuando** llega a la API, **entonces** recibo `400` con cuerpo JSON y un mensaje genérico, sin stack trace.
+  8. **Dado** cualquier otro cuerpo que el parser rechace (más de 1000 parámetros, `Content-Encoding` o charset no soportados), **cuando** llega a la API, **entonces** recibo su status (`413`, `415` u otro 4xx) con cuerpo JSON genérico, sin stack trace ni rutas internas.
 
 ### US4 — Uptime del servicio (P2) [E2]
 Como operador, quiero saber cuánto tiempo lleva el servicio en marcha, para detectar reinicios inesperados. Como desarrollador, quiero verlo documentado junto al endpoint de salud.
@@ -71,7 +72,7 @@ Como operador, quiero saber cuánto tiempo lleva el servicio en marcha, para det
 - **RF-002:** El repo DEBE tener un comando `npm test` que corra los tests con el runner nativo de Node, sin dependencias nuevas.
 - **RF-003:** El README DEBE documentar `GET /api/health` (tabla de endpoints + ejemplo de respuesta).
 - **RF-004:** El sistema NO DEBE enviar `X-Powered-By` y DEBE enviar `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` y `Referrer-Policy: no-referrer` en todas las respuestas. *(US3)*
-- **RF-005:** El sistema DEBE rechazar cuerpos de más de 100 kb (JSON y urlencoded) con `413`, y JSON malformado con `400`, ambos con cuerpo JSON sin stack. *(US3)*
+- **RF-005:** El sistema DEBE rechazar cuerpos de más de 100 kb (JSON y urlencoded) con `413`, JSON malformado con `400`, y cualquier otro cuerpo que el parser rechace con su status 4xx (ej. `415`), siempre con cuerpo JSON sin stack. *(US3)*
 - **RF-006:** El sistema DEBE responder las rutas inexistentes con `404` y cuerpo JSON con un mensaje genérico, sin stack ni detalles internos. *(US3)*
 - **RF-007:** El README DEBE documentar RF-004 a RF-006, y el repo DEBE incluir `.env.example` con `MONGO_URI` y `PORT` sin valores reales. *(US3)*
 - **RF-008:** El sistema DEBE responder `GET /api/health/uptime` con `200` y `{"uptimeSeconds": <entero ≥ 0>}` calculado como `Math.floor(process.uptime())`, sin consultar las BD. *(US4)*
@@ -101,3 +102,4 @@ Como operador, quiero saber cuánto tiempo lleva el servicio en marcha, para det
 | 2026-09-24 | ¿El límite de 100 kb aplica a urlencoded? | Sí: a todo parser de body que use la app. No agregar parsers nuevos |
 | 2026-09-24 | ¿JSON malformado en US3 o E3? | US3: 400 JSON sin stack, en el mismo manejador que el 413. `err.message` general queda para E3 |
 | 2026-09-24 | ¿Uptime de qué? | Del proceso: `Math.floor(process.uptime())` |
+| 2026-09-24 | Hallazgo 1 de T-003-r1 (otros errores de body filtran el stack): ¿corregir o diferir? | A: corregir en ronda 2 de T-003 y T-005 (D-7) |
