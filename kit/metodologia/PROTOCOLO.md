@@ -1,5 +1,7 @@
 # Protocolo CHARTER — reglas obligatorias
 
+> **Referencia completa, para el LIDER.** Los desarrolladores no leen este archivo en cada activación: su versión corta es `GUIA-DESARROLLADOR.md`. Si cambias una regla que afecta a los desarrolladores, cámbiala en los dos.
+
 Todas las instancias de IA (LIDER y desarrolladores) cumplen estas reglas en todos los proyectos. Los roles están en `ROSTER.md`.
 
 ## 1. Dónde vive cada cosa

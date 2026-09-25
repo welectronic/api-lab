@@ -20,7 +20,7 @@ La asignación se decide por **riesgo y ambigüedad**, no por tamaño. Lo ambigu
 | Componentes aislados, formularios, CRUD repetitivo | RAPIDO |
 | Tests unitarios, fixtures, datos de prueba | RAPIDO |
 | Documentación, refactors mecánicos | RAPIDO |
-| Pre-revisión con lista de verificación | RAPIDO (o un SENIOR distinto al autor) |
+| Pre-revisión con lista de verificación (M o `sensible` sin probador) | Distinto al autor, idealmente de otra familia de modelo |
 
 ## Reparto orientativo
 

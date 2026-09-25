@@ -29,6 +29,9 @@ En GitHub: *Settings → Rules → Rulesets* (o *Branches → Branch protection 
 - [ ] *Dependabot alerts* activado.
 - [ ] Repo privado, salvo decisión explícita del PO.
 
+## 4a. CI obligatorio
+- [ ] `.github/workflows/charter-ci.yml` instalado (en T-000 o en la primera tarea) y sus checks marcados como obligatorios en la regla de la rama base (`GUARDAS.md`, capa 0).
+
 ## 4b. Guardas locales (`GUARDAS.md`)
 - [ ] Hook `pre-push` de CHARTER instalado en el clon local del PO (lo instala el LIDER con `CHARTER: <proyecto> instala las guardas en mi clon <ruta>`), probado con un `--dry-run` a la base que debe fallar.
 - [ ] Reglas de `configs/guardas/claude-settings.json` agregadas a la configuración de Claude Code.

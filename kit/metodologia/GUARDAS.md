@@ -4,6 +4,7 @@ Las reglas críticas de CHARTER (ninguna IA hace merge, PR ni push a la rama bas
 
 | Capa | Qué bloquea | Dónde aplica | Límite |
 |---|---|---|---|
+| 0. CI en GitHub (`configs/ci/charter-ci.yml`) | Integrar un PR con secretos, hallazgos de Semgrep, pruebas en rojo o archivos de coordinación | **Todas** las instancias, también Claude Code web, porque corre en GitHub | Solo actúa sobre PR; el push directo lo frenan la regla de la rama y la capa 1. En repos privados consume minutos de GitHub Actions |
 | 1. Hook `pre-push` (`configs/guardas/pre-push`) | Push a la rama base, borrar la base o `charter`, push forzado a `charter` | Cualquier herramienta que empuje desde tu clon local (Claude Code local, Antigravity y tú) | No aplica a Claude Code web (usa su propio clon en la nube); se salta con `--no-verify` (por eso la capa 2 lo niega) |
 | 2. Permisos de Claude Code (`configs/guardas/claude-settings.json`) | `git merge`, `gh pr create/merge`, push forzado, push directo a la base, `--no-verify`, cambiar `core.hooksPath`, editar skills; pide confirmación para editar `kit/` y los hooks | Claude Code local (LIDER, SENIOR-3 y sus subagentes) | Coincide por prefijo: una variante rara del comando podría pasar, pero la capa 1 la detiene al empujar |
 | 3. Lista de comandos de Antigravity | Los mismos comandos de la capa 2 | Antigravity (SENIOR-2, RAPIDO) | Se configura a mano en sus ajustes de terminal (`[INFERENCIA]`: revisa el nombre exacto del ajuste en tu versión) |
@@ -26,3 +27,9 @@ El LIDER:
 5. Le dice al PO qué agregar en la lista de comandos denegados de Antigravity.
 
 Quitar o cambiar una guarda es decisión del PO, como cualquier cambio al kit.
+
+## CI (capa 0): instalación
+1. En T-000 (o en una tarea de E3 en un repo existente), el desarrollador copia `configs/ci/charter-ci.yml` a `.github/workflows/charter-ci.yml` del repo, en su rama de tarea. Ajusta solo lo que el stack exija (por ejemplo, el comando de pruebas).
+2. El PO integra ese PR como cualquier otro.
+3. El PO abre la regla de la rama base en GitHub (*Rulesets*), activa *Require status checks to pass* y agrega `Guardia de ramas`, `Secretos (gitleaks)`, `Análisis estático (Semgrep)` y `Pruebas`. `Dependencias vulnerables` queda informativo hasta que se resuelva la línea base.
+4. Si Semgrep marca algo en código viejo que el PR no tocó, no bloquea: el escaneo compara contra la base del PR.

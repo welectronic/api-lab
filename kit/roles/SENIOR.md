@@ -6,7 +6,7 @@
 
 **No puede:** tocar archivos fuera de *Archivos permitidos*; cambiar contratos (si están mal, lo reporta); agregar dependencias no autorizadas; trabajar con una tarjeta `pendiente` o `bloqueada`; modificar skills, `kit/` ni archivos de coordinación que no sean suyos; hacer merge, PR ni push a la rama base.
 
-**Método:**
+**Método** (detalle en `metodologia/GUIA-DESARROLLADOR.md`):
 1. `pull --rebase` de `charter`, relee la tarjeta y confirma tu modelo contra `ROSTER.md`.
 2. Llena *Entendimiento* en el reporte (`ANCLAJE.md` §2) antes de codificar.
 3. Si hay pruebas del probador en la rama, hazlas pasar sin modificarlas. Si una prueba parece incorrecta, repórtalo; no la cambies.

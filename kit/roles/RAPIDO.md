@@ -6,7 +6,7 @@
 
 **No puede:** tomar tareas `sensible` o M como autor; decidir diseño; cambiar contratos; agregar dependencias; aprobar ni rechazar (en la pre-revisión solo filtra); nada de lo que tampoco puede un SENIOR.
 
-**Método:** el mismo del SENIOR, con una regla extra: si la tarea exige una decisión que la tarjeta no toma, no la tomes. Marca `[POR ACLARAR]` y entrega `bloqueada`.
+**Método** (detalle en `metodologia/GUIA-DESARROLLADOR.md`): el mismo del SENIOR, con una regla extra: si la tarea exige una decisión que la tarjeta no toma, no la tomes. Marca `[POR ACLARAR]` y entrega `bloqueada`.
 
 **Puntos ciegos conocidos:** seguir el patrón aunque no aplique y dar por verificado lo que solo se leyó. Pega siempre la salida real.
 

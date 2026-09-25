@@ -2,6 +2,10 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (4)
+- **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO, a la entrada del CHANGELOG fechada 2026-09-26 (consolidación). Nuevos: `metodologia/GUIA-DESARROLLADOR.md` y `configs/ci/charter-ci.yml`. Actualizados: GUARDAS, PREPARACION-REPO, PROTOCOLO, ROLES, `roles/SENIOR.md`, `roles/RAPIDO.md`, `estandares/seguridad.md`. Sin comercial/, configs/guardas/ ni estándares de otros stacks.
+- **Pendiente de la Fase 0 (nuevo ítem):** `.github/workflows/charter-ci.yml` no existe en `main` [HECHO: `ls .github/workflows` en el clon]; se instala en la próxima tarea de código y el PO marca sus checks como obligatorios en `proteger-main`.
+
 ## 2026-09-25 (3)
 - **Pasó:** Fase 0 §4b completa: guardas en Antigravity (11 comandos). El PO actualizó las skills a mano en todas las instancias. Comprobado en este PC: skill de desarrollador igual al kit en `~/.claude/skills` y en las dos carpetas de Antigravity; `~/.claude/skills/charter-lider` todavía es la versión anterior.
 

@@ -1,0 +1,142 @@
+# CHARTER — CI mínimo para cada PR a la rama base.
+# Se copia a .github/workflows/charter-ci.yml del repo del proyecto (tarea T-000 o equivalente)
+# y el PO lo marca como check obligatorio en la regla de la rama base.
+name: CHARTER CI
+
+on:
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: charter-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guardia:
+    name: Guardia de ramas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: La rama de coordinación nunca se integra al código
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ "$HEAD_REF" = "charter" ]; then
+            echo "::error::La rama 'charter' es de coordinación y nunca se integra al código."; exit 1
+          fi
+          if [ -n "$BASE_SHA" ]; then
+            bad=$(git diff --name-only "$BASE_SHA"...HEAD | grep -E '^(tareas|reportes|revisiones|consejos|kit)/' || true)
+            if [ -n "$bad" ]; then
+              echo "::error::El PR trae archivos de coordinación de CHARTER:"; echo "$bad"; exit 1
+            fi
+          fi
+          case "$HEAD_REF" in
+            chr/T-*) echo "Rama de tarea: $HEAD_REF" ;;
+            *) echo "::warning::La rama '$HEAD_REF' no sigue chr/T-XXX-<slug>." ;;
+          esac
+
+  secretos:
+    name: Secretos (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Escanear los commits del PR
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          RANGE=""
+          if [ -n "$BASE_SHA" ] && [ -n "$HEAD_SHA" ]; then RANGE="--log-opts=$BASE_SHA..$HEAD_SHA"; fi
+          docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:latest \
+            git /repo --redact --no-banner --exit-code 1 $RANGE
+
+  sast:
+    name: Análisis estático (Semgrep)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Semgrep sobre lo que cambia el PR
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          BASELINE=""
+          if [ -n "$BASE_SHA" ]; then BASELINE="--baseline-commit $BASE_SHA"; fi
+          docker run --rm -v "$PWD:/src" -w /src semgrep/semgrep sh -c \
+            "git config --global --add safe.directory /src && semgrep scan --config p/default --error --metrics=off $BASELINE"
+
+  pruebas:
+    name: Pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node / TypeScript / React / n8n
+      - uses: actions/setup-node@v4
+        if: hashFiles('package.json') != ''
+        with:
+          node-version: 22
+      - name: Node — dependencias y tests
+        if: hashFiles('package.json') != ''
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm test
+
+      # Python / Django
+      - uses: actions/setup-python@v5
+        if: hashFiles('requirements.txt', 'pyproject.toml') != ''
+        with:
+          python-version: '3.12'
+      - name: Python — dependencias y tests
+        if: hashFiles('requirements.txt', 'pyproject.toml') != ''
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f pyproject.toml ]; then pip install -e . || true; fi
+          if [ -f manage.py ]; then python manage.py test; else python -m pytest; fi
+
+      # Java / Spring Boot
+      - uses: actions/setup-java@v4
+        if: hashFiles('pom.xml', 'build.gradle', 'build.gradle.kts') != ''
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Java — Maven
+        if: hashFiles('pom.xml') != ''
+        run: mvn -B -ntp verify
+      - name: Java — Gradle
+        if: hashFiles('build.gradle', 'build.gradle.kts') != ''
+        run: ./gradlew check
+
+  dependencias:
+    name: Dependencias vulnerables (informativo)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('package-lock.json') != ''
+        with:
+          node-version: 22
+      - name: npm audit (altas y críticas)
+        if: hashFiles('package-lock.json') != ''
+        run: npm audit --audit-level=high
+      - uses: actions/setup-python@v5
+        if: hashFiles('requirements.txt') != ''
+        with:
+          python-version: '3.12'
+      - name: pip-audit
+        if: hashFiles('requirements.txt') != ''
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt

@@ -31,6 +31,8 @@ Por cada flujo sensible: qué activos protege, quién podría atacarlo, por dón
 | Análisis estático (SAST) | **Semgrep** (reglas OWASP del stack) · Bandit (Python) · SpotBugs + FindSecBugs (Java) | CI |
 | Headers y configuración HTTP | test automatizado que verifica los headers (sección 3) | tests |
 
+**CI listo para usar:** `configs/ci/charter-ci.yml` (GitHub Actions) corre en cada PR la guardia de ramas, gitleaks sobre los commits del PR, Semgrep sobre lo que cambia, las pruebas del stack (Node, Python o Java, según lo que detecte) y la auditoría de dependencias como informativa. Se instala en T-000 y el PO lo marca como check obligatorio.
+
 Configuración base: `configs/seguridad/`. Los comandos se agregan a *Comandos de verificación* en `PROYECTO.md`; **un hallazgo alto o crítico bloquea la entrega**.
 
 ## 3. Reglas técnicas mínimas
