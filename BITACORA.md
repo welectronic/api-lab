@@ -2,6 +2,13 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (11)
+- **Pasó:** el PO completó el kit maestro (03:48). `kit/configs/ci/charter-ci.yml` recopiado (v2); `kit/` coincide con el maestro.
+- **Verificado contra el contenido real:**
+  - `charter-ci.yml` v2: llama a `charter-guardia.sh` (idéntico al de api-lab), no tiene `workflow_dispatch`, fija todas las acciones por SHA y las imágenes por versión y digest, y trae `persist-credentials: false`, `--ignore-gitleaks-allow`, `--disable-nosem`, `${RANGE:+"$RANGE"}`, mínimo 1 test por stack, falla sin stack y `continue-on-error` en el paso del audit. Los SHAs nuevos existen: setup-python v7.0.0 = `5fda3b95…`, setup-java v6.0.1 = `de7274f0…` [HECHO: `git ls-remote`].
+  - Tablero: lee `pruebas_entregas` y pide la entrega 2 en "Activar ahora"; toma la última fecha de `kit/VERSION`.
+- **Resultado:** las 5 propuestas del 2026-09-25 quedan `aplicada`. Calidad de datos con el tablero nuevo: 0 errores y 12 avisos (se fue el de `kit/VERSION`; los demás son horas de las pruebas 1–2).
+
 ## 2026-09-25 (10)
 - **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO, a la segunda entrada del CHANGELOG del 2026-09-26: CICLO-DE-TAREA, GUARDAS, GUIA-DESARROLLADOR, plantillas/TAREA, roles/PROBADOR y el nuevo `configs/ci/charter-guardia.sh`. T-006 lleva `pruebas_entregas: 2`.
 - **Hallazgo:** el kit maestro no cumple su CHANGELOG [HECHO: md5 y grep, 2026-09-25 03:43 −0500]:

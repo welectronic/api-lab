@@ -1,12 +1,16 @@
-# CHARTER — CI mínimo para cada PR a la rama base.
-# Se copia a .github/workflows/charter-ci.yml del repo del proyecto (tarea T-000 o equivalente)
-# y el PO lo marca como check obligatorio en la regla de la rama base.
+# CHARTER — CI mínimo para cada PR a la rama base (versión 2, endurecida por el consejo C-001 de api-lab).
+# Instalación: copiar este archivo a .github/workflows/charter-ci.yml y configs/ci/charter-guardia.sh
+# a .github/scripts/charter-guardia.sh (tarea T-000 o primera tarea de seguridad). Borrar los bloques
+# de stacks que el proyecto no usa. El PO marca como obligatorios los checks "Guardia de ramas",
+# "Secretos (gitleaks)", "Análisis estático (Semgrep)" y "Pruebas".
+# Versiones fijadas: acciones por SHA (etiqueta en comentario) e imágenes por versión y digest.
+# L-1: un PR que edita este workflow corre su versión editada; el LIDER lo controla en la revisión
+# (la guardia avisa cuando un PR toca .github/).
 name: CHARTER CI
 
 on:
   pull_request:
     branches: [main, master, develop]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,35 +24,24 @@ jobs:
     name: Guardia de ramas
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - name: La rama de coordinación nunca se integra al código
+          persist-credentials: false
+      - name: La rama de coordinación y los archivos de CHARTER nunca se integran al código
         env:
           HEAD_REF: ${{ github.head_ref }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: |
-          if [ "$HEAD_REF" = "charter" ]; then
-            echo "::error::La rama 'charter' es de coordinación y nunca se integra al código."; exit 1
-          fi
-          if [ -n "$BASE_SHA" ]; then
-            bad=$(git diff --name-only "$BASE_SHA"...HEAD | grep -E '^(tareas|reportes|revisiones|consejos|kit)/' || true)
-            if [ -n "$bad" ]; then
-              echo "::error::El PR trae archivos de coordinación de CHARTER:"; echo "$bad"; exit 1
-            fi
-          fi
-          case "$HEAD_REF" in
-            chr/T-*) echo "Rama de tarea: $HEAD_REF" ;;
-            *) echo "::warning::La rama '$HEAD_REF' no sigue chr/T-XXX-<slug>." ;;
-          esac
+        run: bash .github/scripts/charter-guardia.sh
 
   secretos:
     name: Secretos (gitleaks)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Escanear los commits del PR
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
@@ -56,64 +49,92 @@ jobs:
         run: |
           RANGE=""
           if [ -n "$BASE_SHA" ] && [ -n "$HEAD_SHA" ]; then RANGE="--log-opts=$BASE_SHA..$HEAD_SHA"; fi
-          docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:latest \
-            git /repo --redact --no-banner --exit-code 1 $RANGE
+          # --ignore-gitleaks-allow: un comentario gitleaks:allow en el PR no suprime el hallazgo.
+          docker run --rm -v "$PWD:/repo" -w /repo \
+            ghcr.io/gitleaks/gitleaks:v8.28.0@sha256:cdbb7c955abce02001a9f6c9f602fb195b7fadc1e812065883f695d1eeaba854 \
+            git /repo --redact --no-banner --exit-code 1 --ignore-gitleaks-allow ${RANGE:+"$RANGE"}
 
   sast:
     name: Análisis estático (Semgrep)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Semgrep sobre lo que cambia el PR
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           BASELINE=""
           if [ -n "$BASE_SHA" ]; then BASELINE="--baseline-commit $BASE_SHA"; fi
-          docker run --rm -v "$PWD:/src" -w /src semgrep/semgrep sh -c \
-            "git config --global --add safe.directory /src && semgrep scan --config p/default --error --metrics=off $BASELINE"
+          # --disable-nosem: un comentario nosemgrep en el PR no suprime el hallazgo.
+          docker run --rm -v "$PWD:/src" -w /src \
+            semgrep/semgrep:1.178.0@sha256:32e459968daabe7ab86968184a29109b9564aa00392401156f9788452b42786b sh -c \
+            "git config --global --add safe.directory /src && semgrep scan --config p/default --error --metrics=off --disable-nosem $BASELINE"
 
   pruebas:
     name: Pruebas
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Detectar el stack (falla si no hay ninguno)
+        id: stack
+        run: |
+          s=""
+          [ -f package.json ] && s="$s node"
+          { [ -f requirements.txt ] || [ -f pyproject.toml ]; } && s="$s python"
+          { [ -f pom.xml ] || [ -f build.gradle ] || [ -f build.gradle.kts ]; } && s="$s java"
+          if [ -z "$s" ]; then echo "::error::No se detectó ningún stack (package.json, requirements.txt, pyproject.toml, pom.xml o build.gradle)."; exit 1; fi
+          echo "Stacks:$s"
 
       # Node / TypeScript / React / n8n
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         if: hashFiles('package.json') != ''
         with:
           node-version: 22
-      - name: Node — dependencias y tests
+      - name: Node — dependencias y tests (mínimo 1 test)
         if: hashFiles('package.json') != ''
         run: |
+          set -o pipefail
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
-          npm test
+          npm test 2>&1 | tee "$RUNNER_TEMP/node-test.log"
+          # node --test: "# tests N"; Jest: "Tests: N passed"; Vitest: "Tests  N passed".
+          if ! grep -qE '^# tests [1-9][0-9]*$|Tests:? +[1-9][0-9]* passed' "$RUNNER_TEMP/node-test.log"; then
+            echo "::error::npm test no ejecutó ninguna prueba."; exit 1
+          fi
 
       # Python / Django
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         if: hashFiles('requirements.txt', 'pyproject.toml') != ''
         with:
           python-version: '3.12'
-      - name: Python — dependencias y tests
+      - name: Python — dependencias y tests (mínimo 1 test)
         if: hashFiles('requirements.txt', 'pyproject.toml') != ''
         run: |
+          set -o pipefail
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          if [ -f pyproject.toml ]; then pip install -e . || true; fi
-          if [ -f manage.py ]; then python manage.py test; else python -m pytest; fi
+          if [ -f pyproject.toml ]; then pip install -e .; fi
+          if [ -f manage.py ]; then python manage.py test 2>&1 | tee "$RUNNER_TEMP/py-test.log"; P='^Ran [1-9][0-9]* test'
+          else python -m pytest 2>&1 | tee "$RUNNER_TEMP/py-test.log"; P='[1-9][0-9]* passed'; fi
+          if ! grep -qE "$P" "$RUNNER_TEMP/py-test.log"; then echo "::error::No se ejecutó ninguna prueba."; exit 1; fi
 
       # Java / Spring Boot
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         if: hashFiles('pom.xml', 'build.gradle', 'build.gradle.kts') != ''
         with:
           distribution: temurin
           java-version: '21'
-      - name: Java — Maven
+      - name: Java — Maven (mínimo 1 test)
         if: hashFiles('pom.xml') != ''
-        run: mvn -B -ntp verify
+        run: |
+          set -o pipefail
+          mvn -B -ntp verify 2>&1 | tee "$RUNNER_TEMP/java-test.log"
+          if ! grep -qE 'Tests run: [1-9][0-9]*' "$RUNNER_TEMP/java-test.log"; then echo "::error::No se ejecutó ninguna prueba."; exit 1; fi
       - name: Java — Gradle
         if: hashFiles('build.gradle', 'build.gradle.kts') != ''
         run: ./gradlew check
@@ -121,22 +142,27 @@ jobs:
   dependencias:
     name: Dependencias vulnerables (informativo)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         if: hashFiles('package-lock.json') != ''
         with:
           node-version: 22
+      # continue-on-error va en el paso, no en el job: así el check queda en verde con un aviso,
+      # en vez de mostrar una ❌ en un PR limpio.
       - name: npm audit (altas y críticas)
         if: hashFiles('package-lock.json') != ''
-        run: npm audit --audit-level=high
-      - uses: actions/setup-python@v5
+        continue-on-error: true
+        run: npm audit --audit-level=high || { echo "::warning::npm audit encontró vulnerabilidades altas o críticas (informativo)."; exit 1; }
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         if: hashFiles('requirements.txt') != ''
         with:
           python-version: '3.12'
       - name: pip-audit
         if: hashFiles('requirements.txt') != ''
+        continue-on-error: true
         run: |
           pip install pip-audit
-          pip-audit -r requirements.txt
+          pip-audit -r requirements.txt || { echo "::warning::pip-audit encontró vulnerabilidades (informativo)."; exit 1; }
