@@ -1,6 +1,6 @@
 # CHARTER — CI mínimo para cada PR a la rama base.
 # Adaptado de kit/configs/ci/charter-ci.yml según el contrato C-006 (T-006, D-8):
-# solo Node, acciones fijadas por SHA, imágenes por versión y digest, sin workflow_dispatch,
+# solo Node, acciones fijadas por SHA, imágenes por versión y digest, sin disparo manual,
 # checkout sin credenciales persistidas y flags contra la supresión de los escáneres.
 # El PO marca los 4 checks bloqueantes como obligatorios en la regla de main.
 # L-1: un PR que edita este workflow corre su versión editada; lo controla el LIDER en la revisión.
