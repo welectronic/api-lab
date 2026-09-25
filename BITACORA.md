@@ -2,6 +2,10 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25
+- **Pasó:** guardas instaladas en el clon del PO (hook pre-push y permisos de Claude Code) y probadas: 3 bloqueos y 1 permitido, como se esperaba. Falta la lista de Antigravity (PO).
+- **Nota:** `kit/` de esta rama todavía no tiene GUARDAS.md ni los cambios del CHANGELOG del 2026-09-25 (anclaje, guardas, subagentes); se sincroniza cuando el PO lo pida.
+
 ## 2026-09-24 (14)
 - **Pasó:** el PO registró su tiempo: 20 min (0.33 h) en cada tarea de T-001 a T-005, 1 h 40 min en total (E1: 40 min, E2: 60 min).
 
