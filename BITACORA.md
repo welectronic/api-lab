@@ -2,6 +2,9 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-24 (14)
+- **Pasó:** el PO registró su tiempo: 20 min (0.33 h) en cada tarea de T-001 a T-005, 1 h 40 min en total (E1: 40 min, E2: 60 min).
+
 ## 2026-09-24 (13)
 - **Pasó:** el cliente aceptó E2: `Aceptada` = 2026-09-24. E2 cerrada: comprometida 2026-10-01, entregada y aceptada 2026-09-24.
 - **Sigue:** E3 o cerrar la prueba.
