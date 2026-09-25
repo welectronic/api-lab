@@ -44,6 +44,6 @@ _Actualizado: 2026-09-25 por LIDER_
 
 ## Para el PO ahora
 - **Activar:** nadie
-- **Merge pendiente:** ninguno. Falta cerrar sin integrar los PR #8–#15 y borrar las 8 ramas `chr/T-006-abuso-*`; decir los minutos de T-006
-- **Decisiones pendientes:** propuestas al kit del 2026-09-25 (5)
+- **Merge pendiente:** ninguno (PR #8–#15 cerrados y ramas borradas, verificado por API)
+- **Decisiones pendientes:** propuestas al kit del 2026-09-25 (5); siguiente paso: seguir con E3 o cerrar la prueba 3
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

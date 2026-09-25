@@ -2,6 +2,30 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (9) — Retro de la prueba 3 (oleada 3)
+- **Pasó:** el PO cerró los PR #8–#15 y borró las 8 ramas de abuso [HECHO: API, 0 PR abiertos]. Registró 60 min en T-006 (`esfuerzo_po_horas: 1.0`).
+- **Objetivos:**
+  - a) ✅ SENIOR-3 como subagente (02:20–02:26), sin otra sesión del PO. El reporte se guardó sin editar; solo se decodificaron las entidades HTML que añadió el transporte.
+  - b) ✅ `reportes/T-006-pruebas.md` a las 02:18; el autor empezó a las 02:20.
+  - c) ⚠️ **Parcial.**
+    - El panel y el *Siguiente:* coincidieron al liberar (SENIOR-2) y tras la entrega 1 (`despacha`).
+    - En la entrega 2 el panel mostraba "Revisar": era un desvío previsto y quedó como propuesta al kit.
+    - El PO tuvo que preguntar qué comando usar: hizo falta el sufijo "entrega 2".
+    - No todas las respuestas del LIDER terminaron con *Siguiente:*: faltó en los avisos de estado durante el consejo.
+  - d) ✅ Presupuestos respetados:
+    - autor: 6 de 30 min;
+    - probador, entrega 1: 5 de 30 min;
+    - probador, entrega 2: ≤ 15 de 20 min.
+  - e) ✅ Los 9 casos fallaron en su check y el PR limpio pasó los 4 obligatorios.
+    - Además, Semgrep también falla en A3/A4.
+    - El check informativo sale en rojo: queda como propuesta al kit.
+  - f) ✅ Calidad de datos con **0 errores** (13 avisos), medida con el validador del tablero en Node sobre `charter`. Los avisos son horas sin zona en los reportes de las pruebas 1–2 y el error de lectura de `kit/VERSION`.
+  - g) ✅ 60 min registrados al integrar.
+- **Retro:**
+  - **Bien:** el consejo encontró 4 huecos reales en el CI del kit antes de escribir código, y el relevo probador → subagente → probador → PO funcionó sin retrabajo (1 ronda).
+  - **Mal:** hubo 2 errores del LIDER en la tarjeta (el `-color=never` de actionlint y la matriz de A4 con `.gitleaksignore`, corregida antes de liberar). La segunda entrega del probador no la modela el tablero. El tiempo del PO se triplicó (60 min frente a 20) por los 9 PR manuales.
+  - **Cambiar:** verificar en la versión instalada los comandos de las herramientas que se citan en los criterios (ANCLAJE); cerrar cada respuesta con *Siguiente:*, incluso los avisos intermedios; evaluar un script para abrir y cerrar los PR de abuso, que ahorraría tiempo del PO.
+
 ## 2026-09-25 (8)
 - **Pasó:** el PO integró el PR #7 → `main` @ `d53b0e9` (08:09 UTC), con contenido idéntico a `chr/T-006-ci` [HECHO: `git diff` vacío]. T-006 `integrada`.
 - **Verificado por API:** `proteger-main` exige `Guardia de ramas`, `Secretos (gitleaks)`, `Análisis estático (Semgrep)` y `Pruebas`, con `integration_id` 15368 (GitHub Actions). Así se cumple el ítem CI de la Fase 0 (`PREPARACION-REPO.md`).
