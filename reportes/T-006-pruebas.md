@@ -9,8 +9,8 @@ rama: chr/T-006-ci
 commit: N/A
 fecha: 2026-09-25
 inicio: 2026-09-25 02:14
-fin: 2026-09-25 02:19
-sesiones: 1
+fin: 2026-09-25 02:43
+sesiones: 2
 ---
 
 # Reporte T-006 — Pruebas y relevo
@@ -47,3 +47,21 @@ Se verificó el correcto funcionamiento de las herramientas localmente, validand
 ### Objeciones a la spec
 1. No se aclara en el criterio de aceptación 2 (`@[0-9a-f]{40} # v`) si las versiones deben llevar el prefijo literal `v` antes del número, lo cual puede ser confuso dependiendo de si la tag original en GitHub lo usa o no (ej. `@<sha> # v4` vs `@<sha> # 4`). Asumo que se debe escribir `# v<versión>`.
 2. El criterio de las pruebas confía en la salida estándar de `npm test` para buscar `# tests N`. Esta salida es específica del test runner nativo de Node.js en su versión actual, pero el workflow no especifica ni fuerza una versión de Node (ej. usando `actions/setup-node`). Esto podría causar que el chequeo `# tests N` falle si el entorno por defecto de los runners de GitHub actualiza la salida de su runner de Node.js.
+
+## Entrega 2: Verificación de la guardia en local
+
+Se crearon y pushearon a `origin` las 8 ramas de abuso especificadas en la matriz desde el SHA base `1460273` de la tarea `T-006` (reportado en `T-006-r1.md`).
+
+A continuación se muestran los resultados (exit codes) de la ejecución en local del script `.github/scripts/charter-guardia.sh` usando la rama respectiva en `HEAD_REF` y la base en `BASE_SHA`:
+
+- `chr/T-006-abuso-kit`: `exit=1` (Detectado por `ABUSO.md`)
+- `chr/T-006-abuso-raiz`: `exit=1` (Detectado por `TABLERO.md` en raíz)
+- `chr/T-006-abuso-secreto`: `exit=0` (Permitido por la guardia, falla en CI)
+- `chr/T-006-abuso-suprime`: `exit=0` (Permitido por la guardia, falla en CI)
+- `chr/T-006-abuso-semgrep`: `exit=0` (Permitido por la guardia, falla en CI)
+- `chr/T-006-abuso-rojo`: `exit=0` (Permitido por la guardia, falla en CI)
+- `chr/T-006-abuso-vacio`: `exit=0` (Permitido por la guardia, falla en CI)
+- `chr/T-006-abuso-ignora`: `exit=1` (Detectado por traer archivos de supresión de escáneres)
+- `charter`: `exit=1` (Detectado como rama de coordinación no integrable)
+
+Los resultados concuerdan estrictamente con el comportamiento definido en el contrato C-006. Las ramas que reportan `exit=0` en la guardia están diseñadas para ser bloqueadas por pasos posteriores del workflow (por ejemplo gitleaks, semgrep o pruebas).
