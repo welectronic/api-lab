@@ -2,6 +2,9 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (3)
+- **Pasó:** Fase 0 §4b completa: guardas en Antigravity (11 comandos). El PO actualizó las skills a mano en todas las instancias. Comprobado en este PC: skill de desarrollador igual al kit en `~/.claude/skills` y en las dos carpetas de Antigravity; `~/.claude/skills/charter-lider` todavía es la versión anterior.
+
 ## 2026-09-25 (2)
 - **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO, incluida `kit/roles/` (tarjetas LIDER, SENIOR, RAPIDO, PROBADOR, DEPURADOR, PRE-REVISOR y 4 lentes). Nuevos: ANCLAJE.md, CONSEJO-DE-DISENO.md, GUARDAS.md, plantillas/CONSEJO.md. Se agregan `consejos/` y la sección *Supuestos y desconocidos* en ARQUITECTURA.md.
 - **Aplica desde la próxima tarea:** etiquetas de evidencia, *Entendimiento* en el reporte, 2 objeciones en quien revisa, probador en M o `sensible`, `presupuesto` por tarea, línea *Siguiente:* en cada respuesta. E3 tiene tareas `sensible`: convocar el consejo de diseño antes de contratar.
