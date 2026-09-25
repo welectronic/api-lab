@@ -46,6 +46,8 @@ Antes de afirmar algo, córrelo **después de tu último cambio** y pega la sali
 | Terminaste | Siguiente |
 |---|---|
 | Pruebas (probador) o reproducción (depurador) | El autor: `CHARTER: <proyecto> <AUTOR> T-XXX` |
+| Entrega 2 del probador | Al LIDER: `CHARTER: <proyecto> revisar` |
+| Tu tarea, y el probador tiene `pruebas_entregas: 2` | El probador: `CHARTER: <proyecto> <PROBADOR> T-XXX` |
 | Tu tarea, y tiene pre-revisor | `CHARTER: <proyecto> <PRE-REVISOR> T-XXX` |
 | Tu tarea sin pre-revisor, o una pre-revisión | Al LIDER: `CHARTER: <proyecto> revisar` |
 | Una ronda de asiento externo | Al LIDER: `CHARTER: <proyecto> revisar` |

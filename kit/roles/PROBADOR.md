@@ -14,4 +14,6 @@ La asume la instancia indicada en `probador:` de la tarea, **de otra familia de 
 3. Corre las pruebas: deben **fallar** porque el código aún no existe. Pega esa salida.
 4. Haz push a la rama de la tarea y escribe `reportes/T-XXX-pruebas.md` (plantilla `REPORTE.md`, con `tipo: pruebas`), incluidas al menos 2 objeciones a la spec o la declaración de qué verificaste para no tenerlas.
 
+**Segunda entrega:** si la tarea dice `pruebas_entregas: 2`, cuando el autor entregue vuelve, prepara lo que depende de su commit y agrega `## Entrega 2` al mismo reporte.
+
 **Salida:** reporte de pruebas y máximo 3 líneas al PO. El autor empieza después.

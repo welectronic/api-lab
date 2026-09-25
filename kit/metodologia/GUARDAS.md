@@ -29,7 +29,20 @@ El LIDER:
 Quitar o cambiar una guarda es decisión del PO, como cualquier cambio al kit.
 
 ## CI (capa 0): instalación
-1. En T-000 (o en una tarea de E3 en un repo existente), el desarrollador copia `configs/ci/charter-ci.yml` a `.github/workflows/charter-ci.yml` del repo, en su rama de tarea. Ajusta solo lo que el stack exija (por ejemplo, el comando de pruebas).
-2. El PO integra ese PR como cualquier otro.
+1. En T-000 (o en la primera tarea de seguridad de un repo existente), el desarrollador copia `configs/ci/charter-ci.yml` a `.github/workflows/charter-ci.yml` y `configs/ci/charter-guardia.sh` a `.github/scripts/charter-guardia.sh`, en su rama de tarea. Borra los bloques de los stacks que el proyecto no usa y no cambia las versiones fijadas (acciones por SHA, imágenes por versión y digest).
+2. El PO integra ese PR como cualquier otro. Es una tarea `sensible`: lleva probador de otra familia, que prepara ramas de abuso (archivos de `kit/` o de la raíz de `charter`, un secreto, un comentario `gitleaks:allow`, un `nosemgrep`, una prueba en rojo, cero pruebas, archivos `.gitleaksignore`/`.semgrepignore` y un PR desde `charter`). El PO abre esos PR como borrador, confirma que fallen en el check correcto y los cierra sin integrar.
 3. El PO abre la regla de la rama base en GitHub (*Rulesets*), activa *Require status checks to pass* y agrega `Guardia de ramas`, `Secretos (gitleaks)`, `Análisis estático (Semgrep)` y `Pruebas`. `Dependencias vulnerables` queda informativo hasta que se resuelva la línea base.
 4. Si Semgrep marca algo en código viejo que el PR no tocó, no bloquea: el escaneo compara contra la base del PR.
+
+### Qué endurece la versión 2 (consejo C-001 de api-lab)
+- Sin disparo manual: el CI solo corre en PR, y la guardia falla si no hay base con la que comparar.
+- La guardia (`charter-guardia.sh`) también rechaza los `.md` de la raíz de `charter` y los archivos que suprimen escáneres, y falla cerrada si no puede calcular el diff.
+- Gitleaks ignora los comentarios `gitleaks:allow` y Semgrep los `nosemgrep` que traiga el PR.
+- *Pruebas* falla si no detecta ningún stack o si se ejecutan cero pruebas.
+- `persist-credentials: false` en todos los checkouts.
+- La auditoría de dependencias es informativa en el **paso**, no en el job: queda en verde con un aviso y no muestra una ❌ en un PR limpio.
+
+### Límites conocidos
+- **L-1:** un PR que edita el workflow corre su versión editada. La guardia avisa cuando un PR toca `.github/`, y el LIDER revisa ese diff completo.
+- **Falso verde en Windows:** gitleaks y Semgrep en Docker Desktop no leen bien un worktree de Windows y pueden no encontrar nada. La verificación que vale es la de GitHub Actions; en local, úsalos en WSL o en un clon normal.
+- **actionlint:** en la terminal de Windows usa `actionlint -no-color` para que la salida sea legible.

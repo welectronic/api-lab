@@ -51,6 +51,7 @@ Cada tarea declara `presupuesto:` (sesiones y minutos de IA). Si el desarrollado
 2. El PO activa primero al probador. Escribe las pruebas de aceptación y de abuso sin ver código, confirma que fallan, las sube a la rama de la tarea y entrega `reportes/T-XXX-pruebas.md`.
 3. El autor no empieza hasta que exista ese reporte. Hace pasar las pruebas sin modificarlas; si una le parece incorrecta, lo reporta.
 4. Con probador, la pre-revisión no hace falta.
+5. **Segunda entrega:** si las pruebas necesitan el código del autor (por ejemplo, ramas de abuso sobre su commit), el LIDER pone `pruebas_entregas: 2`. Cuando el autor entrega, el probador agrega `## Entrega 2` al mismo `reportes/T-XXX-pruebas.md` y solo entonces sigue la revisión del LIDER. El tablero lo muestra en *Activar ahora*.
 
 ## Depuración (en bugs)
 

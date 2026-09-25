@@ -2,6 +2,13 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (10)
+- **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO, a la segunda entrada del CHANGELOG del 2026-09-26: CICLO-DE-TAREA, GUARDAS, GUIA-DESARROLLADOR, plantillas/TAREA, roles/PROBADOR y el nuevo `configs/ci/charter-guardia.sh`. T-006 lleva `pruebas_entregas: 2`.
+- **Hallazgo:** el kit maestro no cumple su CHANGELOG [HECHO: md5 y grep, 2026-09-25 03:43 −0500]:
+  - `configs/ci/charter-ci.yml` es idéntico a la versión anterior: no llama a `charter-guardia.sh`, no fija versiones y no tiene los flags de la v2;
+  - `tablero/tablero.html` no lee `pruebas_entregas` y sigue tomando la primera fecha de `kit/VERSION`.
+- **Propuestas en TABLERO:** 3 parciales y 2 no aplicadas, según lo que hay en los archivos, no lo que dice el CHANGELOG. api-lab no se afecta: su CI ya es la v2.
+
 ## 2026-09-25 (9) — Retro de la prueba 3 (oleada 3)
 - **Pasó:** el PO cerró los PR #8–#15 y borró las 8 ramas de abuso [HECHO: API, 0 PR abiertos]. Registró 60 min en T-006 (`esfuerzo_po_horas: 1.0`).
 - **Objetivos:**

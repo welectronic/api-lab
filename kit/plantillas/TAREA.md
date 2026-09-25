@@ -2,6 +2,7 @@
 id: T-XXX
 titulo: <verbo + objeto>
 asignado: LIDER | SENIOR-1 | SENIOR-2 | RAPIDO
+pruebas_entregas: <1 por defecto; 2 si el probador debe entregar una segunda parte sobre el commit del autor, por ejemplo ramas de abuso>
 probador: <solo M o sensible: ROL de otra familia de modelo que escribe las pruebas antes que el autor, o ninguno>
 prerevisor: <si no hay probador y es M o sensible: ROL distinto al autor; si no: ninguno>
 depurador: <solo correctivo: ROL que reproduce el bug y escribe el test que falla, o ninguno>
