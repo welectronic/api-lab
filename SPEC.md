@@ -1,6 +1,6 @@
 # Especificación — el QUÉ y el PORQUÉ
 
-Estado: E1 integrada; E2 aprobada por el PO (alcance 2026-09-24); E3 en backlog · Fecha: 2026-09-24
+Estado: E1 y E2 integradas; E3 en curso con US5 (dictada por el PO, 2026-09-25) · Fecha: 2026-09-25
 
 ## Problema y usuarios
 Quien opera o prueba la API (el PO, un balanceador, un monitor) necesita saber si el servicio está vivo y desde cuándo, sin tocar las bases de datos. La API es pública (laboratorio) y hoy responde con los valores por defecto de Express: anuncia la tecnología, no envía headers de protección y devuelve errores en HTML. Además, el proyecto sirve para **probar el flujo CHARTER**.
@@ -14,7 +14,7 @@ Quien opera o prueba la API (el PO, un balanceador, un monitor) necesita saber s
 
 - **E1** se registró después de terminada para que sus historias tengan épica; sus tareas se integraron el 2026-09-24. `Entregada` se llena cuando el PO diga `entregué E1`.
 - **E2** = las 3 tareas de la prueba 2: endurecimiento HTTP, uptime y su documentación. La documentación va dentro de US3 y US4.
-- **E3** no tiene fecha comprometida ni historias todavía; sus ítems están en `PLAN.md` → Backlog.
+- **E3** no tiene fecha comprometida. US5 (CI de CHARTER) la dictó el PO el 2026-09-25 como primera tarea de la prueba 3; el resto sigue en `PLAN.md` → Backlog.
 
 ## Historias de usuario (priorizadas)
 
@@ -60,6 +60,20 @@ Como operador, quiero saber cuánto tiempo lleva el servicio en marcha, para det
   3. **Dado** que MongoDB y SQLite no están disponibles, **cuando** corro los tests, **entonces** el test de uptime pasa igual.
   4. **Dado** que llego al repo, **cuando** leo el README, **entonces** `GET /api/health/uptime` aparece en la tabla de salud con un ejemplo de respuesta.
 
+### US5 — Ningún PR indebido llega a `main` (P1) [E3]
+Como PO, quiero que GitHub no deje integrar a `main` un PR con secretos, hallazgos de análisis estático, pruebas en rojo o sin pruebas, o archivos de coordinación de CHARTER, para no depender solo de la revisión.
+
+- **Por qué esta prioridad:** es la capa 0 de las guardas (`kit/metodologia/GUARDAS.md`) y un ítem de la Fase 0 pendiente desde el kit del 2026-09-26.
+- **Prueba independiente:** PR de abuso en borrador, uno por caso, que deben fallar en el check indicado; el PR de la tarea debe pasar.
+- **Seguridad:** `sensible` (control de seguridad, cadena de suministro).
+- **Escenarios:**
+  1. **Dado** un PR a `main` limpio, **cuando** corre el CI, **entonces** pasan `Guardia de ramas`, `Secretos (gitleaks)`, `Análisis estático (Semgrep)` y `Pruebas`.
+  2. **Dado** un PR con archivos de coordinación (carpetas o `.md` de la raíz de `charter`) o archivos que suprimen escáneres, **cuando** corre el CI, **entonces** falla `Guardia de ramas`.
+  3. **Dado** un PR con un secreto, aunque lleve `gitleaks:allow`, **cuando** corre el CI, **entonces** falla `Secretos (gitleaks)`.
+  4. **Dado** un PR con código que Semgrep marca, aunque lleve `nosemgrep`, **cuando** corre el CI, **entonces** falla `Análisis estático (Semgrep)`.
+  5. **Dado** un PR con una prueba en rojo o sin ninguna prueba, **cuando** corre el CI, **entonces** falla `Pruebas`.
+  6. **Dado** que se integra el PR, **cuando** el PO marca los 4 checks como obligatorios en `proteger-main`, **entonces** un PR con un check en rojo no se puede integrar sin bypass.
+
 ## Casos borde
 - `/api/health` es un endpoint de liveness, no de readiness: **no** consulta las BD. Responde `ok` aunque Mongo esté caído.
 - El uptime cuenta desde que arrancó el proceso y vuelve a 0 tras un reinicio. Se redondea hacia abajo: nunca es decimal ni negativo.
@@ -77,6 +91,7 @@ Como operador, quiero saber cuánto tiempo lleva el servicio en marcha, para det
 - **RF-007:** El README DEBE documentar RF-004 a RF-006, y el repo DEBE incluir `.env.example` con `MONGO_URI` y `PORT` sin valores reales. *(US3)*
 - **RF-008:** El sistema DEBE responder `GET /api/health/uptime` con `200` y `{"uptimeSeconds": <entero ≥ 0>}` calculado como `Math.floor(process.uptime())`, sin consultar las BD. *(US4)*
 - **RF-009:** El README DEBE documentar `GET /api/health/uptime` con un ejemplo de respuesta. *(US4)*
+- **RF-010:** Todo PR a `main` DEBE pasar por el CI de C-006, y sus 4 checks bloqueantes DEBEN fallar en los casos de abuso de T-006. *(US5)*
 - Todos los cambios de E2 se hacen **sin dependencias nuevas**.
 
 ## Criterios de éxito (medibles)

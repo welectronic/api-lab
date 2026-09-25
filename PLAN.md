@@ -32,7 +32,7 @@ Prueba mínima del flujo CHARTER con `GET /api/health` + su test + su documentac
 | Ítem | Épica | Tipo de valor | Motivo | Origen |
 |---|---|---|---|---|
 | Actualizar dependencias vulnerables (`mongoose`, `sequelize`, `sqlite3` → 6.x mayor; transitivas `tar`, `path-to-regexp`, `lodash`…) | E3 | robustez | 1 critical + 14 high en `npm audit` | LIDER, 2026-09-24 |
-| T-000: gitleaks, Semgrep, ESLint/Prettier y CI | E3 | robustez | Omitido en la prueba (D-4) | LIDER |
+| T-000: gitleaks, Semgrep, ESLint/Prettier y CI | E3 | robustez | Omitido en la prueba (D-4). CI, gitleaks y Semgrep → **T-006** (US5, 2026-09-25); falta ESLint/Prettier | LIDER |
 | Los endpoints existentes devuelven `err.message` al cliente (expone detalles internos) | E3 | robustez | `seguridad.md` §3 HTTP | LIDER, 2026-09-24 |
 | Logs de peticiones (método, ruta, status, duración; sin datos personales ni cuerpos) | E3 | robustez | Observabilidad | LIDER, 2026-09-24 |
 | `database.sqlite` está versionado en `main`: confirmar que no tiene datos reales y sacarlo del repo (`.gitignore`) | E3 | robustez | Repo público (D-1) | LIDER, 2026-09-24 |

@@ -6,7 +6,8 @@
 <!-- Un contrato no se libera si depende de un supuesto abierto (kit/metodologia/ANCLAJE.md). -->
 | ID | Afirmación | Tipo | Cómo se verifica | Responsable | Afecta | Estado |
 |---|---|---|---|---|---|---|
-| — | Ninguno abierto. C-001 a C-005 se contrataron antes del anclaje; su comportamiento está verificado por los tests integrados en `main` | — | — | — | — | — |
+| — | C-001 a C-005 se contrataron antes del anclaje; su comportamiento está verificado por los tests integrados en `main` | — | — | — | — | — |
+| S-001 | GitHub no deja abrir un PR entre `charter` (huérfana) y `main` porque no tienen historia común | INFERENCIA | El PO intenta abrirlo en T-006 y guarda el mensaje | PO | T-006 (solo la forma de probar A8, no el contrato) | abierto |
 
 ## Contratos entre módulos
 
@@ -65,6 +66,46 @@ PORT=3000
 ```
 - `.env` sigue en `.gitignore`.
 
+### C-006 — CI de CHARTER (US5, T-006; consejo C-001, D-8)
+Plantilla: `kit/configs/ci/charter-ci.yml`, adaptada a Node. Archivos: `.github/workflows/charter-ci.yml` y `.github/scripts/charter-guardia.sh`.
+
+**Disparo y permisos**
+- `on: pull_request` a `branches: [main]`. **Sin** `workflow_dispatch` ni `pull_request_target`.
+- `permissions: contents: read`. Se mantiene la `concurrency` de la plantilla.
+
+**Versiones fijas** [HECHO: `git ls-remote` y registros, 2026-09-25]
+```
+actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1   (node24)
+actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0 (node24)
+ghcr.io/gitleaks/gitleaks:v8.28.0@sha256:cdbb7c955abce02001a9f6c9f602fb195b7fadc1e812065883f695d1eeaba854
+semgrep/semgrep:1.178.0@sha256:32e459968daabe7ab86968184a29109b9564aa00392401156f9788452b42786b
+```
+- Todo `actions/checkout` lleva `persist-credentials: false`.
+- `setup-node` usa `node-version: 22`.
+
+**Jobs.** Los id y los `name:` están congelados, porque el ruleset los busca por nombre exacto.
+
+| id | `name:` (exacto) | Obligatorio | Falla cuando |
+|---|---|---|---|
+| `guardia` | `Guardia de ramas` | sí | lo decide `charter-guardia.sh` (abajo) |
+| `secretos` | `Secretos (gitleaks)` | sí | gitleaks encuentra un secreto en los commits del PR (`--log-opts=BASE..HEAD`), con `--ignore-gitleaks-allow` además de las opciones de la plantilla |
+| `sast` | `Análisis estático (Semgrep)` | sí | Semgrep `p/default` encuentra algo nuevo frente a `--baseline-commit BASE_SHA`, con `--disable-nosem` además de las opciones de la plantilla |
+| `pruebas` | `Pruebas` | sí | `npm ci` o `npm test` fallan, **o** la salida de `npm test` no tiene `# tests N` con N ≥ 1. Los pasos no tienen `if:` |
+| `dependencias` | `Dependencias vulnerables (informativo)` | no (`continue-on-error: true`) | `npm audit --audit-level=high` (informativo; D-3) |
+
+**`charter-guardia.sh`** (bash, solo `git`/`grep`)
+- Entrada: variables `HEAD_REF` y `BASE_SHA`. Corre desde la raíz del repo. Se puede correr en local: `HEAD_REF=<rama> BASE_SHA=<sha> bash .github/scripts/charter-guardia.sh`.
+- Salida: exit 1 con `::error::` y la lista de archivos si se da alguna de estas condiciones:
+  1. `HEAD_REF` = `charter`.
+  2. `BASE_SHA` vacío: "no se puede verificar sin la base del PR".
+  3. `git diff --name-only BASE_SHA...HEAD` trae alguna de estas rutas:
+     - `^(tareas|reportes|revisiones|consejos|kit)/`;
+     - un archivo de la raíz de `charter`: `ARQUITECTURA.md BITACORA.md CONVENCIONES.md DECISIONES.md DIAGNOSTICO.md LEEME.md PLAN.md PRINCIPIOS.md PROYECTO.md SPEC.md TABLERO.md TROPIEZOS.md` (exacto, en la raíz; `README.md` **no**);
+     - un archivo llamado `.gitleaks.toml`, `.gitleaksignore` o `.semgrepignore` en cualquier ruta.
+- En los demás casos, exit 0. Si el PR toca `.github/`, emite `::warning::` con la lista, y lo mismo si la rama no sigue `chr/T-XXX-<slug>`.
+
+**Límite documentado (L-1).** Un PR que edita el propio workflow corre su versión editada y puede quedar en verde. Con una sola cuenta admin (D-5), ni CODEOWNERS ni el ruleset lo impiden. Control: en cada `revisar`, el LIDER lee completo el diff de `.github/` y lo anota en la revisión.
+
 ## Modelo de amenazas (flujos sensibles)
 Oleada 1: ningún flujo sensible. Oleada 2 (E2): US3 es sensible (headers y entrada de usuario); T-005 es sensible porque toca la plantilla de secretos.
 
@@ -74,6 +115,7 @@ Oleada 1: ningún flujo sensible. Oleada 2 (E2): US3 es sensible (headers y entr
 | Respuestas de error y headers (US3) | Información interna (tecnología, stack, rutas) | Cualquier cliente anónimo | Toda petición: ruta, método, cuerpo | C-003: sin `X-Powered-By`, cuerpos de error fijos, headers de protección | `tests/http-hardening.test.js` |
 | Parsers de body (US3) | Memoria y CPU del proceso | Cliente que envía cuerpos grandes o comprimidos | `POST`/`PUT` con JSON o urlencoded | Límite de 100 kb en ambos parsers (también tras descomprimir) → `413` | `tests/http-hardening.test.js` |
 | `GET /api/health/uptime` (US4) | Información interna | Cliente anónimo | Ninguna | Solo un entero; sin versión, host ni fecha de arranque | `tests/health-uptime.test.js` |
+| CI de PR (US5, T-006) | Integridad de `main`: sin secretos, sin sinks, sin pruebas en rojo ni archivos de coordinación | Agente o persona con escritura (la cuenta del PO) | El contenido del PR, incluidos el workflow y los archivos de supresión de los escáneres | C-006: versiones fijas por SHA y digest, token de solo lectura sin persistir, sin dispatch, guardia de raíz y de supresión, flags anti‑supresión; L-1 queda para la revisión | Casos A1–A9 de T-006 (PR en borrador) |
 | `.env.example` / README (T-005) | Credenciales de MongoDB | Cualquiera que lea el repo público | Archivos versionados | Solo marcadores `<…>`; `.env` ignorado; push protection de GitHub | Revisión del LIDER + `git check-ignore .env` |
 
 ## Verificación contra principios

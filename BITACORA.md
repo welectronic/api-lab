@@ -2,6 +2,24 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (5) — Prueba 3
+- **Arranca la prueba 3** con T-006 (CI de CHARTER, E3). Autor: SENIOR-3 como subagente del LIDER. Probador: SENIOR-2. Decisiones del PO: versiones fijas (gitleaks v8.28.0, Semgrep vigente, acciones por SHA) y ramas de abuso preparadas por el probador; el PO abre los PR en borrador y los cierra.
+- **Objetivos de la prueba 3 (se miden en la retro):**
+  - a) Despacho a subagente: SENIOR-3 trabaja sin que el PO abra otra sesión y su reporte llega sin editar.
+  - b) Probador primero: el autor no empieza hasta que exista `reportes/T-006-pruebas.md`.
+  - c) Relevo: cada respuesta termina con "Siguiente:" y coincide con el panel "Activar ahora" del tablero.
+  - d) Presupuesto declarado y respetado.
+  - e) CI: los 4 casos de abuso fallan en el check correcto y el PR limpio pasa.
+  - f) Calidad de datos del tablero en cero errores al cerrar.
+  - g) Tiempo del PO registrado al integrar.
+- **Consejo C-001 cerrado:**
+  - Las 4 lentes corrieron como subagentes, con contrapunto anónimo y un contrafactual.
+  - Hubo 3 bloqueantes y todos se levantaron con el contrato C-006. Decisión D-8; disenso de SIMPLICIDAD (llevarlo primero al kit) → propuesta al kit.
+  - Los casos de abuso pasan de 4 a 9 (A1–A9) y los PR en borrador, de 3 a 8.
+- **Liberada T-006** (oleada 3). US5 y RF-010 en SPEC; `DECISIONES.md` migrado al formato del kit (Consejo, Revertir si, Revisar el).
+- **Verificado por el LIDER:** SHAs y digests de C-006; en Node 22, `node --test` con 0 tests sale con 0; `--disable-nosem` existe en Semgrep 1.178.0; `safe.directory` viene en la imagen de gitleaks.
+- **Sigue:** SENIOR-2, entrega 1 → el LIDER despacha a SENIOR-3 → SENIOR-2, entrega 2 → el PO abre los PR en borrador → `revisar`.
+
 ## 2026-09-25 (4)
 - **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO, a la entrada del CHANGELOG fechada 2026-09-26 (consolidación). Nuevos: `metodologia/GUIA-DESARROLLADOR.md` y `configs/ci/charter-ci.yml`. Actualizados: GUARDAS, PREPARACION-REPO, PROTOCOLO, ROLES, `roles/SENIOR.md`, `roles/RAPIDO.md`, `estandares/seguridad.md`. Sin comercial/, configs/guardas/ ni estándares de otros stacks.
 - **Pendiente de la Fase 0 (nuevo ítem):** `.github/workflows/charter-ci.yml` no existe en `main` [HECHO: `ls .github/workflows` en el clon]; se instala en la próxima tarea de código y el PO marca sus checks como obligatorios en `proteger-main`.
