@@ -2,6 +2,13 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (6)
+- **Pasó:**
+  - SENIOR-2, entrega 1: 02:14–02:19.
+  - Despacho de SENIOR-3 como subagente: 02:20–02:26, en 1 sesión y dentro de su presupuesto de 30 min. `chr/T-006-ci` @ `1460273` con los criterios 1 a 9 en verde en local.
+  - `reportes/T-006-r1.md` se guardó como lo devolvió el subagente. Solo se decodificaron las entidades `&gt;`, `&lt;` y `&amp;`, que añadió el transporte de la notificación.
+- **Corregido en la tarjeta:** criterio 7, `-color=never` → `-no-color` (error del LIDER); SHA para la entrega 2; aviso de Docker con worktrees de Windows.
+
 ## 2026-09-25 (5) — Prueba 3
 - **Arranca la prueba 3** con T-006 (CI de CHARTER, E3). Autor: SENIOR-3 como subagente del LIDER. Probador: SENIOR-2. Decisiones del PO: versiones fijas (gitleaks v8.28.0, Semgrep vigente, acciones por SHA) y ramas de abuso preparadas por el probador; el PO abre los PR en borrador y los cierra.
 - **Objetivos de la prueba 3 (se miden en la retro):**
