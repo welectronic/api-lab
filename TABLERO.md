@@ -9,7 +9,7 @@ _Actualizado: 2026-09-25 por LIDER_
 | T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | integrada | 2 | `chr/T-003-http-hardening` |
 | T-004 | GET /api/health/uptime + test | SENIOR-1 | SENIOR-3 | 2 | nucleo | integrada | 1 | `chr/T-004-uptime` |
 | T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | integrada (cierre LIDER) | 2 | `chr/T-005-docs-env` |
-| T-006 | CI de CHARTER (C-006) + casos de abuso | SENIOR-3 (subagente) | probador SENIOR-2 | 3 | robustez | aprobada (PR #7) | 1 | `chr/T-006-ci` |
+| T-006 | CI de CHARTER (C-006) + casos de abuso | SENIOR-3 (subagente) | probador SENIOR-2 | 3 | robustez | integrada (PR #7, `d53b0e9`) | 1 | `chr/T-006-ci` |
 
 ## Observaciones del proceso
 | Fecha | Observación | Origen |
@@ -44,6 +44,6 @@ _Actualizado: 2026-09-25 por LIDER_
 
 ## Para el PO ahora
 - **Activar:** nadie
-- **Merge pendiente:** PR #7 (`chr/T-006-ci`), después de marcar los 4 checks obligatorios; cerrar #8–#15 y borrar sus ramas
+- **Merge pendiente:** ninguno. Falta cerrar sin integrar los PR #8–#15 y borrar las 8 ramas `chr/T-006-abuso-*`; decir los minutos de T-006
 - **Decisiones pendientes:** propuestas al kit del 2026-09-25 (5)
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO

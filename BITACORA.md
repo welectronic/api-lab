@@ -2,6 +2,12 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (8)
+- **Pasó:** el PO integró el PR #7 → `main` @ `d53b0e9` (08:09 UTC), con contenido idéntico a `chr/T-006-ci` [HECHO: `git diff` vacío]. T-006 `integrada`.
+- **Verificado por API:** `proteger-main` exige `Guardia de ramas`, `Secretos (gitleaks)`, `Análisis estático (Semgrep)` y `Pruebas`, con `integration_id` 15368 (GitHub Actions). Así se cumple el ítem CI de la Fase 0 (`PREPARACION-REPO.md`).
+- **Pendiente del PO:** cerrar los PR #8–#15 (siguen abiertos) y borrar las 8 ramas de abuso; `esfuerzo_po_horas` de T-006.
+- **Última verificación en verde:** los checks de #7 sobre `1460273`. El merge commit no tiene checks propios, porque el CI solo corre en `pull_request`.
+
 ## 2026-09-25 (7)
 - **Pasó:**
   - SENIOR-2, entrega 2 (02:41): 8 ramas de abuso sobre `1460273`.
