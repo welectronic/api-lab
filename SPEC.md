@@ -1,6 +1,6 @@
 # Especificación — el QUÉ y el PORQUÉ
 
-Estado: E1 y E2 integradas; E3 en curso con US5 (dictada por el PO, 2026-09-25) · Fecha: 2026-09-25
+Estado: E1 entregada; E2 aceptada; E3 con US5 integrada y el resto en backlog (prueba 3 cerrada, 2026-09-25) · Fecha: 2026-09-25
 
 ## Problema y usuarios
 Quien opera o prueba la API (el PO, un balanceador, un monitor) necesita saber si el servicio está vivo y desde cuándo, sin tocar las bases de datos. La API es pública (laboratorio) y hoy responde con los valores por defecto de Express: anuncia la tecnología, no envía headers de protección y devuelve errores en HTML. Además, el proyecto sirve para **probar el flujo CHARTER**.
@@ -8,11 +8,11 @@ Quien opera o prueba la API (el PO, un balanceador, un monitor) necesita saber s
 ## Épicas
 | ID | Épica | Comprometida | Entregada | Aceptada |
 |---|---|---|---|---|
-| E1 | Prueba del flujo CHARTER: endpoint de salud (US1, US2) | — | — | — |
+| E1 | Prueba del flujo CHARTER: endpoint de salud (US1, US2) | — | 2026-09-25 | — |
 | E2 | Endurecimiento y observabilidad (US3, US4) | 2026-10-01 | 2026-09-24 | 2026-09-24 |
 | E3 | Seguridad continua (backlog de `PLAN.md`) | — | — | — |
 
-- **E1** se registró después de terminada para que sus historias tengan épica; sus tareas se integraron el 2026-09-24. `Entregada` se llena cuando el PO diga `entregué E1`.
+- **E1** se registró después de terminada para que sus historias tengan épica; sus tareas se integraron el 2026-09-24. Entregada el 2026-09-25 (PO); `Aceptada` se llena cuando el cliente la acepte.
 - **E2** = las 3 tareas de la prueba 2: endurecimiento HTTP, uptime y su documentación. La documentación va dentro de US3 y US4.
 - **E3** no tiene fecha comprometida. US5 (CI de CHARTER) la dictó el PO el 2026-09-25 como primera tarea de la prueba 3; el resto sigue en `PLAN.md` → Backlog.
 

@@ -2,6 +2,18 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (12) — Cierre de la prueba 3
+- **Estado:** prueba 3 cerrada por el PO. E1 `Entregada` = 2026-09-25, sin fecha comprometida, así que no cuenta en cumplimiento. E2 aceptada. E3: US5 (T-006) integrada; el resto sigue en el backlog de `PLAN.md`, sin fecha.
+- **Resultado de la prueba 3** (detalle en la entrada 9): 6 de 7 objetivos cumplidos y (c) relevo parcial. Todas las propuestas de la prueba ya están aplicadas en el kit maestro (CHANGELOG 2026-09-26).
+- **Para retomar:**
+  - `main` @ `d53b0e9` con el CI v2 obligatorio;
+  - `charter` limpio, sin tareas abiertas y con WIP en 0;
+  - calidad de datos con 0 errores;
+  - D-5 sigue vigente;
+  - D-8 se revisa el 2026-10-25.
+- **Última verificación en verde:** PR #7, los 4 checks obligatorios en `1460273`.
+- **Sigue:** nada, hasta que el PO pida un `requerimiento:`. La recomendación para empezar E3 es `database.sqlite` (repo público).
+
 ## 2026-09-25 (11)
 - **Pasó:** el PO completó el kit maestro (03:48). `kit/configs/ci/charter-ci.yml` recopiado (v2); `kit/` coincide con el maestro.
 - **Verificado contra el contenido real:**

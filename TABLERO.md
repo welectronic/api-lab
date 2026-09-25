@@ -45,5 +45,5 @@ _Actualizado: 2026-09-25 por LIDER_
 ## Para el PO ahora
 - **Activar:** nadie
 - **Merge pendiente:** ninguno (PR #8–#15 cerrados y ramas borradas, verificado por API)
-- **Decisiones pendientes:** siguiente paso: seguir con E3 o cerrar la prueba 3
+- **Decisiones pendientes:** ninguna. Prueba 3 cerrada; E3 sigue en backlog hasta un nuevo `requerimiento:`
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO
