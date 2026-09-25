@@ -12,7 +12,7 @@ CHARTER: <proyecto> requerimiento: <qué necesitas y por qué, en lenguaje de ne
 
 1. **Especificar:** el LIDER actualiza `SPEC.md` con historias, criterios y lo que queda fuera de alcance, y hace **máximo 5 preguntas**, solo las que cambian el diseño.
 2. **Aprobar:** el PO responde y aprueba.
-3. **Diseñar y dividir:** contratos en `ARQUITECTURA.md` y tareas S/M sin archivos compartidos, asignadas según `ROLES.md`, con la seguridad clasificada.
+3. **Diseñar y dividir:** si corresponde, convoca el consejo de diseño (`CONSEJO-DE-DISENO.md`); verifica los supuestos (`ANCLAJE.md`); luego contratos en `ARQUITECTURA.md` y tareas S/M sin archivos compartidos, asignadas según `ROLES.md`, con la seguridad clasificada.
 4. **Entregar:** tarjetas en `tareas/`, `TABLERO.md` actualizado y los comandos de activación.
 
 ## B. Tareas dictadas (el PO define las tareas)
@@ -30,7 +30,8 @@ CHARTER: <proyecto> tareas: <N>
    - Hasta 3 preguntas, solo si algo es ambiguo.
 
    Todavía no crea tarjetas. Si hay preguntas, espera la respuesta. Si no, pide la siguiente: "Listo para la tarea 2 de N".
-4. **Cuando tiene las N tareas**, el LIDER valida el conjunto:
+4. **Cuando tiene las N tareas**, el LIDER valida el conjunto (y, si alguna es M o `sensible`, convoca antes el consejo de diseño):
+   - Que ningún contrato dependa de un supuesto abierto.
    - Que no compartan archivos. Si chocan, propone repartirlos o encadenar las tareas con `depende_de`.
    - Que los contratos entre tareas estén definidos.
    - Que cada una tenga un rol asignado (el que pidió el PO, o uno según `ROLES.md`) y un pre-revisor si es M o `sensible`.
@@ -56,7 +57,7 @@ CHARTER: <proyecto> bug: <qué pasa, dónde, a quién o a qué área le pasa>
    - Severidad propuesta (tabla abajo) y archivos probables.
    - Seguridad `normal` o `sensible`.
    - Solo si faltan, las preguntas para reproducirlo: dónde (pantalla, URL o endpoint), qué hizo el usuario, qué esperaba y qué vio, desde cuándo.
-2. **Reproducir antes de liberar:** el LIDER busca la causa en el código (o delega el diagnóstico). Si no logra reproducirlo, lo dice y pide más datos; no crea una tarea a ciegas.
+2. **Reproducir antes de arreglar:** el LIDER no diagnostica él mismo. Crea la tarjeta con `depurador: <ROL>` (RAPIDO o un SENIOR; en bugs de seguridad, un SENIOR), que reproduce el fallo y escribe el test de regresión que falla (`roles/DEPURADOR.md`). El arreglo empieza cuando existe `reportes/T-XXX-depuracion.md`. El LIDER solo diagnostica si el depurador no logra reproducirlo; si tampoco lo logra, pide más datos al PO.
 3. **Crear la tarjeta** con `tipo: correctivo`, `severidad`, `reportado_por` (rol o área, sin datos personales) y, si la identifica, `causado_por: T-XXX` (la tarea integrada que introdujo el fallo). Rama `chr/T-XXX-fix-<slug>`.
    - **Criterio 1 obligatorio:** un test de regresión que reproduce el bug. Falla antes del arreglo y pasa después; el reporte trae ambas salidas.
 4. **Encolar según la severidad:**

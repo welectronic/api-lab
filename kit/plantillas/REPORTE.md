@@ -2,6 +2,7 @@
 tarea: T-XXX
 ronda: 1
 autor: <TU-ID>
+tipo: codigo | pruebas | depuracion
 herramienta_modelo: <ej. Antigravity / Gemini 3.1 Pro (High)>
 estado: listo_para_revision | bloqueada
 rama: chr/T-XXX-<slug>
@@ -13,6 +14,12 @@ sesiones: 1
 ---
 
 # Reporte T-XXX — ronda N
+
+## Entendimiento (antes de codificar)
+- **Voy a lograr:** <una frase>
+- **Archivos que tocaré:** <lista; deben estar en Archivos permitidos>
+- **Queda fuera:** <lo que no haré>
+> Si algo no coincide con la tarjeta, detente y entrega `bloqueada`.
 
 ## Qué hice
 - <resumen por punto>
@@ -39,7 +46,7 @@ $ <comando tests>
 |---|---|---|
 | 1 | sí / no | <comando + línea de salida, o descripción de la prueba punta a punta> |
 
-## Decisiones que tomé
+## Decisiones que tomé (con etiquetas de evidencia)
 - <decisión menor dentro del alcance + razón>
 
 ## [POR ACLARAR] / bloqueos / propuestas

@@ -37,6 +37,10 @@ $ <comandos de verificación>
 | No se repite ningún error de `TROPIEZOS.md` | | |
 | No hay código muerto, logs de depuración ni TODOs sin tarea | | |
 
+## Objeciones (mínimo 2, o qué verificaste para no encontrarlas)
+1. <objeción concreta con [HECHO: archivo:línea]>
+2. …
+
 ## Hallazgos (verificados en el código)
 1. `<archivo>:<línea>` — <problema concreto> — severidad: alta/media/baja
 

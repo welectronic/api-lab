@@ -18,7 +18,10 @@ Varias instancias escriben en la rama `charter`. Para que `pull --rebase` nunca 
 | `PROYECTO`, `PRINCIPIOS`, `SPEC`, `PLAN`, `ARQUITECTURA`, `CONVENCIONES`, `DECISIONES`, `TABLERO`, `BITACORA`, `TROPIEZOS` | LIDER (con aprobación del PO donde se indica) |
 | `tareas/T-XXX.md` | LIDER |
 | `reportes/T-XXX-rN.md` | El desarrollador asignado |
+| `reportes/T-XXX-pruebas.md` / `reportes/T-XXX-depuracion.md` | El probador / el depurador asignado |
 | `revisiones/T-XXX-rN-pre.md` | El pre-revisor asignado |
+| `consejos/C-00N-<slug>.md` | LIDER |
+| `consejos/C-00N-<ROL>.md` | La instancia que ocupa el asiento externo |
 | `revisiones/T-XXX-rN.md` | LIDER |
 | `DIAGNOSTICO.md` | Quien tenga asignada la tarea de diagnóstico |
 | `kit/` (copia del kit) | LIDER |
@@ -166,3 +169,18 @@ El valor para la agencia es **entregar lo comprometido, a tiempo, sin retrabajo 
 **Informe al cliente:** la pestaña *Informe* del tablero arma el resumen del periodo (entregado, aceptado, bugs resueltos, ajustes y próximos compromisos) sin costos, nombres de instancias ni datos internos, listo para imprimir o guardar como PDF. No consume tokens.
 
 **Mide lo que decide:** si un dato no cambia una decisión (cotizar, reasignar, renegociar una fecha), no se agrega.
+
+## 14. Anclaje, roles y consejo de diseño
+
+- **Anclaje** (`ANCLAJE.md`): etiquetas de evidencia en contratos, decisiones, hallazgos y reportes; reformular antes de actuar; al menos 2 objeciones en quien revisa; familias de modelo opuestas entre autor y crítico.
+- **Tarjetas de rol** (`roles/`, en la rama `kit/roles/`): cada instancia lee la de su rol y la de la función que le asigne la tarea (probador, depurador, pre-revisor o lente). Lo que la tarjeta prohíbe no se hace.
+- **Consejo de diseño** (`CONSEJO-DE-DISENO.md`): lentes independientes antes de congelar contratos en épicas M, sensibles o irreversibles, en elecciones de stack o con supuestos abiertos. Sin consenso, decide el PO.
+- **Supuestos y desconocidos** en `ARQUITECTURA.md`: ninguna tarea se libera si su contrato depende de uno abierto.
+- **Decisiones** con evidencia, criterio de reversión y fecha de revisión. En cada retro, el LIDER actualiza el estado de las que vencieron.
+
+## 15. Guardas, subagentes y relevo
+
+- **Guardas** (`GUARDAS.md`): hook `pre-push`, permisos de Claude Code y lista de comandos de Antigravity hacen que las acciones prohibidas fallen, no solo que estén prohibidas.
+- **Subagentes** (`agentes/subagente-desarrollador.md`): el LIDER ejecuta las tareas de SENIOR-3 y las lentes del consejo desde su sesión, sin activaciones del PO.
+- **Relevo** (`CICLO-DE-TAREA.md`): cada respuesta termina con el comando exacto para quien sigue; el tablero lo muestra en *Activar ahora*.
+- **Presupuesto** por tarea: quien lo va a superar se detiene y reporta.

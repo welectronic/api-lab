@@ -2,6 +2,12 @@
 
 > Repo existente: solo lo que cambia en esta iteración.
 
+## Supuestos y desconocidos
+<!-- Un contrato no se libera si depende de un supuesto abierto (kit/metodologia/ANCLAJE.md). -->
+| ID | Afirmación | Tipo | Cómo se verifica | Responsable | Afecta | Estado |
+|---|---|---|---|---|---|---|
+| — | Ninguno abierto. C-001 a C-005 se contrataron antes del anclaje; su comportamiento está verificado por los tests integrados en `main` | — | — | — | — | — |
+
 ## Contratos entre módulos
 
 ### C-001 — `GET /api/health`

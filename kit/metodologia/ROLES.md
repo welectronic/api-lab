@@ -55,3 +55,14 @@ Ver recorte en [GESTION-DE-CAMBIOS.md](GESTION-DE-CAMBIOS.md).
 - La cuota del LIDER se gasta en planear y revisar, no en código repetitivo.
 - Las instancias con límites de uso bajos (ver `ROSTER.md`) reciben solo tareas S/M.
 - La pre-revisión la hace un rol de bajo costo para que el LIDER revise menos.
+
+## Funciones por tarea
+
+Además de su rol, una instancia puede asumir una **función** en una tarea. Cada función tiene su tarjeta en `roles/`.
+
+| Función | Cuándo | Quién |
+|---|---|---|
+| Probador | Tareas M o `sensible` | Un rol de **otra familia de modelo** que el autor |
+| Depurador | Bugs (`tipo: correctivo`) | RAPIDO o un SENIOR |
+| Pre-revisor | M o `sensible` sin probador | Distinto al autor, idealmente de otra familia |
+| Lente del consejo | Consejo de diseño | Subagentes del LIDER; asiento externo de otra familia si es sensible o irreversible |

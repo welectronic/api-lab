@@ -9,11 +9,11 @@ rama charter
 ├── LEEME.md                  ← qué es esta rama y cómo se usa
 ├── PROYECTO.md  PRINCIPIOS.md  SPEC.md  PLAN.md  ARQUITECTURA.md
 ├── CONVENCIONES.md  DECISIONES.md  TABLERO.md  BITACORA.md  TROPIEZOS.md  DIAGNOSTICO.md
-├── tareas/  reportes/  revisiones/
+├── tareas/  reportes/  revisiones/  consejos/
 └── kit/                      ← copia del kit (solo lo que el proyecto usa)
     ├── VERSION               ← fecha de la copia
     ├── ROSTER.md
-    ├── metodologia/  plantillas/
+    ├── metodologia/  plantillas/  roles/
     └── estandares/           ← seguridad.md + los del stack del proyecto + configs
 ```
 

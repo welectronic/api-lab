@@ -29,6 +29,11 @@ En GitHub: *Settings → Rules → Rulesets* (o *Branches → Branch protection 
 - [ ] *Dependabot alerts* activado.
 - [ ] Repo privado, salvo decisión explícita del PO.
 
+## 4b. Guardas locales (`GUARDAS.md`)
+- [ ] Hook `pre-push` de CHARTER instalado en el clon local del PO (lo instala el LIDER con `CHARTER: <proyecto> instala las guardas en mi clon <ruta>`), probado con un `--dry-run` a la base que debe fallar.
+- [ ] Reglas de `configs/guardas/claude-settings.json` agregadas a la configuración de Claude Code.
+- [ ] Comandos denegados configurados en Antigravity.
+
 ## 5. Registro
 El LIDER anota en `PROYECTO.md`:
 ```

@@ -2,6 +2,10 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (2)
+- **Pasó:** `kit/` sincronizado con el kit maestro por indicación del PO, incluida `kit/roles/` (tarjetas LIDER, SENIOR, RAPIDO, PROBADOR, DEPURADOR, PRE-REVISOR y 4 lentes). Nuevos: ANCLAJE.md, CONSEJO-DE-DISENO.md, GUARDAS.md, plantillas/CONSEJO.md. Se agregan `consejos/` y la sección *Supuestos y desconocidos* en ARQUITECTURA.md.
+- **Aplica desde la próxima tarea:** etiquetas de evidencia, *Entendimiento* en el reporte, 2 objeciones en quien revisa, probador en M o `sensible`, `presupuesto` por tarea, línea *Siguiente:* en cada respuesta. E3 tiene tareas `sensible`: convocar el consejo de diseño antes de contratar.
+
 ## 2026-09-25
 - **Pasó:** guardas instaladas en el clon del PO (hook pre-push y permisos de Claude Code) y probadas: 3 bloqueos y 1 permitido, como se esperaba. Falta la lista de Antigravity (PO).
 - **Nota:** `kit/` de esta rama todavía no tiene GUARDAS.md ni los cambios del CHANGELOG del 2026-09-25 (anclaje, guardas, subagentes); se sincroniza cuando el PO lo pida.

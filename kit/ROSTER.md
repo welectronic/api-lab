@@ -16,16 +16,17 @@ Un proyecto puede tener su propio `ROSTER.md` en su carpeta; si existe, reemplaz
 
 ## Asignación actual
 
-| ID | Herramienta | Modelo | Plan / cuota | Notas |
-|---|---|---|---|---|
-| `LIDER` | Claude (app de escritorio, Cowork) | Claude Opus (el más reciente disponible) | Team | Cuota más valiosa: planear y revisar |
-| `SENIOR-1` | Claude (app o Claude Code) | Claude Opus | Pro | Mismo modelo, límites más bajos: solo tareas S/M |
-| `SENIOR-2` | Antigravity | Gemini 3.1 Pro (High) | Propia | Seleccionar el modelo antes de activar |
-| `RAPIDO` | Antigravity | Gemini 3.8 Flash (Medium) | Propia | Misma instalación que SENIOR-2, con otro modelo |
-| `SENIOR-3` | Claude Code (local, escritorio o web; sesión aparte de la del LIDER) | Claude Opus | Team (compartida con el LIDER) | Skill `charter-desarrollador` en `~/.claude/skills/`. Comparte cuota con el LIDER |
+| ID | Herramienta | Modelo | Familia | Plan / cuota | Notas |
+|---|---|---|---|---|---|
+| `LIDER` | Claude (app de escritorio, Cowork) | Claude Opus (el más reciente disponible) | Claude | Team | Cuota más valiosa: planear y revisar |
+| `SENIOR-1` | Claude (app o Claude Code) | Claude Opus | Claude | Pro | Mismo modelo, límites más bajos: solo tareas S/M |
+| `SENIOR-2` | Antigravity | Gemini 3.1 Pro (High) | Gemini | Propia | Seleccionar el modelo antes de activar |
+| `RAPIDO` | Antigravity | Gemini 3.8 Flash (Medium) | Gemini | Propia | Misma instalación que SENIOR-2, con otro modelo |
+| `SENIOR-3` | Subagente del LIDER en Claude Code local (por defecto) o una sesión aparte de Claude Code | Claude Opus | Claude | Team (compartida con el LIDER) | Skill `charter-desarrollador` en `~/.claude/skills/`. Comparte cuota con el LIDER |
 
 ## Reglas del roster
 
+- **Familia de modelo:** quien prueba o critica el trabajo de otro debería ser de otra familia (`ANCLAJE.md` §4).
 - **Lo que se controla es el modelo, no la herramienta.** Un rol de Claude puede correr en Claude Code local, de escritorio o web, siempre con el modelo de su fila; cada instancia confirma su modelo antes de trabajar y lo pone en `herramienta_modelo`. Una misma sesión ocupa un solo rol a la vez.
 - Un rol puede quedar vacío. Sus tareas pasan al siguiente rol de la cadena de respaldo.
 - **Cadena de respaldo:** `RAPIDO → SENIOR-2 → SENIOR-1 → LIDER`.

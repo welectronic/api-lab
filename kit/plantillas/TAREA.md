@@ -2,7 +2,10 @@
 id: T-XXX
 titulo: <verbo + objeto>
 asignado: LIDER | SENIOR-1 | SENIOR-2 | RAPIDO
-prerevisor: <ID distinto al autor; obligatorio si talla M o seguridad sensible, si no: ninguno>
+probador: <solo M o sensible: ROL de otra familia de modelo que escribe las pruebas antes que el autor, o ninguno>
+prerevisor: <si no hay probador y es M o sensible: ROL distinto al autor; si no: ninguno>
+depurador: <solo correctivo: ROL que reproduce el bug y escribe el test que falla, o ninguno>
+consejo: <C-00N que diseñó esto, o ninguno>
 talla: S | M
 tipo_valor: desbloqueante | nucleo | robustez | pulido | especulativo
 tipo: evolutivo | correctivo | ajuste
@@ -19,6 +22,7 @@ rama: chr/T-XXX-<slug>
 rama_origen: <rama base o rama de la dependencia>
 depende_de: []
 irreversible: no | si
+presupuesto: <ej. 1 sesión / 30 min de IA; si se va a superar, el desarrollador se detiene y reporta>
 seguridad: normal | sensible
 creada: AAAA-MM-DD
 liberada: <AAAA-MM-DD, cuando pasa a en_progreso>
@@ -42,8 +46,12 @@ esfuerzo_po_horas: <horas del PO en esta tarea (revisar, probar, integrar); lo a
 - Archivos del repo de referencia (solo lectura): `<ruta>`
 
 ## Archivos permitidos
+- Pruebas (solo probador o depurador): `<ruta de los archivos de test>`
 - Crear/modificar: `<ruta o carpeta>`
 - **No tocar:** `<rutas sensibles>`
+
+## Supuestos que afectan esta tarea
+<S-00N verificados; si hay alguno abierto, la tarea no se libera>
 
 ## Contrato a respetar
 ```

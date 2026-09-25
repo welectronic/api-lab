@@ -24,7 +24,39 @@ pendiente ─► en_progreso ─► (pre-revisión) ─► en_revision ─► ap
 - Rama de tarea: `chr/T-XXX-<slug>`, creada desde la rama base actualizada.
 - Si depende de una tarea aún no integrada, la tarea lo indica y se ramifica desde esa rama.
 
-## Pre-revisión (opcional, recomendada en tallas M)
+## Relevo: quién sigue
+
+Cada instancia termina su respuesta al PO con **Siguiente:** y el comando exacto. El PO solo lo copia. El tablero muestra lo mismo en el panel *Activar ahora*.
+
+| Termina | Siguiente |
+|---|---|
+| El LIDER libera una tarea con probador | El probador: `CHARTER: <proyecto> <PROBADOR> T-XXX` |
+| El LIDER libera un bug con depurador | El depurador: `CHARTER: <proyecto> <DEPURADOR> T-XXX` |
+| El LIDER libera una tarea sin probador ni depurador | El autor: `CHARTER: <proyecto> <AUTOR> T-XXX` |
+| El probador o el depurador entrega | El autor: `CHARTER: <proyecto> <AUTOR> T-XXX` |
+| El autor entrega y la tarea tiene pre-revisor | El pre-revisor: `CHARTER: <proyecto> <PRE-REVISOR> T-XXX` |
+| El autor entrega sin pre-revisor, o el pre-revisor entrega | El LIDER: `CHARTER: <proyecto> revisar` |
+| El LIDER aprueba | El PO: PR y merge, luego `CHARTER: <proyecto> integré T-XXX (<min>)` |
+| El LIDER pide cambios | El autor: `CHARTER: <proyecto> <AUTOR> T-XXX` |
+
+Si el autor es un subagente del LIDER (`agentes/subagente-desarrollador.md`), el LIDER hace ese relevo solo y no hace falta activar a nadie.
+
+## Presupuesto
+
+Cada tarea declara `presupuesto:` (sesiones y minutos de IA). Si el desarrollador ve que lo va a superar, se detiene y reporta `bloqueada`. El tablero marca las tareas que se pasaron. Un presupuesto superado es una señal de que la tarea estaba mal dimensionada o mal especificada, no una falta del desarrollador.
+
+## Pruebas primero (probador, en tareas M o sensibles)
+
+1. La tarea indica `probador: <ROL>`, de otra familia de modelo que el autor (`ROSTER.md`); en tareas `sensible`, un SENIOR. Reemplaza al pre-revisor, así que no suma activaciones: solo cambia el orden (primero el probador, después el autor).
+2. El PO activa primero al probador. Escribe las pruebas de aceptación y de abuso sin ver código, confirma que fallan, las sube a la rama de la tarea y entrega `reportes/T-XXX-pruebas.md`.
+3. El autor no empieza hasta que exista ese reporte. Hace pasar las pruebas sin modificarlas; si una le parece incorrecta, lo reporta.
+4. Con probador, la pre-revisión no hace falta.
+
+## Depuración (en bugs)
+
+En `tipo: correctivo`, si la tarea indica `depurador: <ROL>`, esa instancia reproduce el fallo y escribe el test de regresión que falla (`reportes/T-XXX-depuracion.md`). Luego el autor arregla.
+
+## Pre-revisión (cuando no hay probador)
 
 Su objetivo es ahorrar cuota del LIDER filtrando los errores evidentes.
 
