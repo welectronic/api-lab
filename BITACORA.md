@@ -2,6 +2,9 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (13)
+- **Pasó:** el cliente aceptó E1: `Aceptada` = 2026-09-25. E1 cerrada, entregada y aceptada el mismo día, sin fecha comprometida. E1 y E2 cerradas; E3 en backlog.
+
 ## 2026-09-25 (12) — Cierre de la prueba 3
 - **Estado:** prueba 3 cerrada por el PO. E1 `Entregada` = 2026-09-25, sin fecha comprometida, así que no cuenta en cumplimiento. E2 aceptada. E3: US5 (T-006) integrada; el resto sigue en el backlog de `PLAN.md`, sin fecha.
 - **Resultado de la prueba 3** (detalle en la entrada 9): 6 de 7 objetivos cumplidos y (c) relevo parcial. Todas las propuestas de la prueba ya están aplicadas en el kit maestro (CHANGELOG 2026-09-26).
