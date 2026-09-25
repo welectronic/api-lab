@@ -2,6 +2,14 @@
 
 Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 
+## 2026-09-25 (7)
+- **Pasó:**
+  - SENIOR-2, entrega 2 (02:41): 8 ramas de abuso sobre `1460273`.
+  - El PO abrió los PR #7–#15 en borrador y confirmó el rechazo de `charter` → `main` (S-001 verificado).
+  - **T-006 APROBADA** (`revisiones/T-006-r1.md`): los 9 casos quedaron en el check correcto y el PR limpio pasó los 4 obligatorios. La causa de gitleaks y Semgrep se reprodujo en local con la misma imagen y el mismo digest.
+- **Nuevo:** tropiezo #5 (Docker con worktrees de Windows) y 2 propuestas al kit (check informativo en rojo; guías de SENIOR-3).
+- **Sigue:** el PO marca los 4 checks obligatorios en `proteger-main`, integra #7, cierra #8–#15, borra las ramas → `integré T-006 (<min>)` → retro de la prueba 3.
+
 ## 2026-09-25 (6)
 - **Pasó:**
   - SENIOR-2, entrega 1: 02:14–02:19.

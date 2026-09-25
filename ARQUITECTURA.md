@@ -7,7 +7,7 @@
 | ID | Afirmación | Tipo | Cómo se verifica | Responsable | Afecta | Estado |
 |---|---|---|---|---|---|---|
 | — | C-001 a C-005 se contrataron antes del anclaje; su comportamiento está verificado por los tests integrados en `main` | — | — | — | — | — |
-| S-001 | GitHub no deja abrir un PR entre `charter` (huérfana) y `main` porque no tienen historia común | INFERENCIA | El PO intenta abrirlo en T-006 y guarda el mensaje | PO | T-006 (solo la forma de probar A8, no el contrato) | abierto |
+| S-001 | GitHub no deja abrir un PR entre `charter` (huérfana) y `main` porque no tienen historia común | HECHO (2026-09-25, PO: "main and charter are entirely different commit histories") | El PO intenta abrirlo en T-006 y guarda el mensaje | PO | T-006 (solo la forma de probar A8, no el contrato) | verificado |
 
 ## Contratos entre módulos
 

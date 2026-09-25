@@ -8,3 +8,4 @@ Errores que alguna instancia ya cometió en este proyecto. Una línea por regla.
 | 2 | Antes de trabajar, confirma que el modelo seleccionado es el del rol en `kit/ROSTER.md` y ponlo tal cual en `herramienta_modelo` | T-002 |
 | 3 | Trabaja en tu propio worktree `../api-lab.T-XXX` (`git worktree add ../api-lab.T-XXX -b chr/T-XXX-<slug> origin/main`). Nunca cambies de rama el clon del PO | T-002 |
 | 4 | Justo antes de empezar o de cada ronda, `git pull --rebase` en `charter` y relee tu tarjeta: si dice `bloqueada` o `pendiente`, no trabajes. Una ronda hecha con la tarjeta vieja se pierde | T-005 |
+| 5 | Para verificar con gitleaks o Semgrep en Docker, usa un **clon completo** en una carpeta temporal, no tu worktree: en Windows, el `.git` del worktree apunta a `C:/…`, que el contenedor no ve, y gitleaks da "0 commits scanned" con exit 0 (un falso verde) | T-006 |

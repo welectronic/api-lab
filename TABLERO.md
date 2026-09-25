@@ -9,7 +9,7 @@ _Actualizado: 2026-09-25 por LIDER_
 | T-003 | Endurecer HTTP (headers, límite, 400/413/404) | SENIOR-3 | RAPIDO | 2 | robustez | integrada | 2 | `chr/T-003-http-hardening` |
 | T-004 | GET /api/health/uptime + test | SENIOR-1 | SENIOR-3 | 2 | nucleo | integrada | 1 | `chr/T-004-uptime` |
 | T-005 | README (US3, US4) + `.env.example` | SENIOR-2 | RAPIDO | 2 | pulido | integrada (cierre LIDER) | 2 | `chr/T-005-docs-env` |
-| T-006 | CI de CHARTER (C-006) + casos de abuso | SENIOR-3 (subagente) | probador SENIOR-2 | 3 | robustez | en_progreso: esperando las pruebas | — | `chr/T-006-ci` |
+| T-006 | CI de CHARTER (C-006) + casos de abuso | SENIOR-3 (subagente) | probador SENIOR-2 | 3 | robustez | aprobada (PR #7) | 1 | `chr/T-006-ci` |
 
 ## Observaciones del proceso
 | Fecha | Observación | Origen |
@@ -38,10 +38,12 @@ _Actualizado: 2026-09-25 por LIDER_
 | 2026-09-24 | ROSTER: SENIOR-3 = "Claude Code (local o web)", o una fila aparte para web | SENIOR-3 (T-003) | aplicada (CHANGELOG 2026-09-25) |
 | 2026-09-25 | `configs/ci/charter-ci.yml`: aplicar el endurecimiento de C-006 (D-8) con el mismo texto: guardia en script, raíz de `charter` y archivos de supresión, sin `workflow_dispatch` (o fallar sin `BASE_SHA`), `persist-credentials: false`, `--ignore-gitleaks-allow`, `--disable-nosem`, mínimo 1 test, y fallar si no se detecta ningún stack. Documentar L-1 en GUARDAS | Consejo C-001 | pendiente |
 | 2026-09-25 | Tablero: modelar una segunda entrega del probador (`reportes/T-XXX-pruebas.md` con "Entrega 2" pendiente) en "Activar ahora"; leer la **última** fecha de `kit/VERSION` | LIDER (prueba 3) | pendiente |
+| 2026-09-25 | `configs/ci/charter-ci.yml`: `continue-on-error` en el **paso** de `npm audit` (o `::warning::`), no en el job. Hoy el check informativo queda en `failure` y el PR limpio muestra una ❌ | LIDER (T-006-r1, hallazgo 1) | pendiente |
+| 2026-09-25 | Guías: advertir que gitleaks y Semgrep en Docker no leen un worktree de Windows (falso verde); usar `-no-color` en actionlint; `${RANGE:+"$RANGE"}` en el job de gitleaks (SC2086) | SENIOR-3 (T-006) | pendiente |
 | 2026-09-25 | `configs/ci/charter-ci.yml`: fijar las imágenes por versión exacta (hoy `gitleaks:latest` y `semgrep/semgrep` sin etiqueta) y las acciones por SHA con la etiqueta en un comentario, para evitar un cambio silencioso en la cadena de suministro. Aplicado en api-lab con T-006 | PO (prueba 3) | pendiente |
 
 ## Para el PO ahora
-- **Activar:** SENIOR-2 (Antigravity · Gemini 3.1 Pro High) → `CHARTER: api-lab SENIOR-2 T-006` (pruebas, entrega 1)
-- **Merge pendiente:** ninguno
-- **Decisiones pendientes:** propuestas al kit del 2026-09-25 (3)
+- **Activar:** nadie
+- **Merge pendiente:** PR #7 (`chr/T-006-ci`), después de marcar los 4 checks obligatorios; cerrar #8–#15 y borrar sus ramas
+- **Decisiones pendientes:** propuestas al kit del 2026-09-25 (5)
 - **Riesgo aceptado:** D-5 — GitHub no bloquea push directo a `main` con la cuenta del PO
