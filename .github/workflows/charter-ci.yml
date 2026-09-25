@@ -1,0 +1,110 @@
+# CHARTER — CI mínimo para cada PR a la rama base.
+# Adaptado de kit/configs/ci/charter-ci.yml según el contrato C-006 (T-006, D-8):
+# solo Node, acciones fijadas por SHA, imágenes por versión y digest, sin disparo manual,
+# checkout sin credenciales persistidas y flags contra la supresión de los escáneres.
+# El PO marca los 4 checks bloqueantes como obligatorios en la regla de main.
+# L-1: un PR que edita este workflow corre su versión editada; lo controla el LIDER en la revisión.
+name: CHARTER CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: charter-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guardia:
+    name: Guardia de ramas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: La rama de coordinación y los archivos de CHARTER nunca se integran al código
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: bash .github/scripts/charter-guardia.sh
+
+  secretos:
+    name: Secretos (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Escanear los commits del PR
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          RANGE=""
+          if [ -n "$BASE_SHA" ] && [ -n "$HEAD_SHA" ]; then RANGE="--log-opts=$BASE_SHA..$HEAD_SHA"; fi
+          # --ignore-gitleaks-allow: un comentario gitleaks:allow en el PR no suprime el hallazgo.
+          docker run --rm -v "$PWD:/repo" -w /repo \
+            ghcr.io/gitleaks/gitleaks:v8.28.0@sha256:cdbb7c955abce02001a9f6c9f602fb195b7fadc1e812065883f695d1eeaba854 \
+            git /repo --redact --no-banner --exit-code 1 --ignore-gitleaks-allow ${RANGE:+"$RANGE"}
+
+  sast:
+    name: Análisis estático (Semgrep)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Semgrep sobre lo que cambia el PR
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          BASELINE=""
+          if [ -n "$BASE_SHA" ]; then BASELINE="--baseline-commit $BASE_SHA"; fi
+          # --disable-nosem: un comentario nosemgrep en el PR no suprime el hallazgo.
+          docker run --rm -v "$PWD:/src" -w /src \
+            semgrep/semgrep:1.178.0@sha256:32e459968daabe7ab86968184a29109b9564aa00392401156f9788452b42786b sh -c \
+            "git config --global --add safe.directory /src && semgrep scan --config p/default --error --metrics=off --disable-nosem $BASELINE"
+
+  pruebas:
+    name: Pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Node (sin if: el check nunca se salta)
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+      - name: Node — dependencias y tests (mínimo 1 test)
+        run: |
+          set -o pipefail
+          npm ci
+          npm test 2>&1 | tee "$RUNNER_TEMP/npm-test.log"
+          if ! grep -qE '^# tests [1-9][0-9]*$' "$RUNNER_TEMP/npm-test.log"; then
+            echo "::error::npm test no ejecutó ninguna prueba (se exige '# tests N' con N >= 1)."
+            exit 1
+          fi
+
+  dependencias:
+    name: Dependencias vulnerables (informativo)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        if: hashFiles('package-lock.json') != ''
+        with:
+          node-version: 22
+      - name: npm audit (altas y críticas)
+        if: hashFiles('package-lock.json') != ''
+        run: npm audit --audit-level=high
