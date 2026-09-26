@@ -186,3 +186,12 @@ El valor para la agencia es **entregar lo comprometido, a tiempo, sin retrabajo 
 - **Subagentes** (`agentes/subagente-desarrollador.md`): el LIDER ejecuta las tareas de SENIOR-3 y las lentes del consejo desde su sesión, sin activaciones del PO.
 - **Relevo** (`CICLO-DE-TAREA.md`): cada respuesta termina con el comando exacto para quien sigue; el tablero lo muestra en *Activar ahora*.
 - **Presupuesto** por tarea: quien lo va a superar se detiene y reporta.
+
+## 16. Cotización
+
+- **Proceso** (`COTIZADOR.md`): brief → requisitos (RF, RNF medibles, contexto) → capacidades del catálogo → cálculo con `cotizador/cotizar.py` → documento interno técnico y guía comercial. Modo nuevo o ampliación (con `CONTEXTO-PROYECTO.md`).
+- **En horas, sin precio ni fechas:** IA, PO y duración en rango. Las oleadas de la primera entrega son comprometidas; las demás, indicativas.
+- **La guía comercial** es para el equipo comercial: sin nada técnico ni precio, no se envía al cliente. El precio lo define el equipo comercial.
+- **Brechas de la especificación** como salida obligatoria; con brechas críticas abiertas no se envía.
+- **Dónde vive:** `CHARTER-DEV/cotizaciones/`, nunca en `charter` ni en `kit/`. Al aprobarse, el LIDER siembra épicas (`Cotizado (h)`, `COT`), arquitectura y decisiones.
+- **Recalibración:** en los puntos declarados se compara cotizado contra real; con más de 25 % de desviación, el LIDER propone recotizar. El catálogo se ajusta con el histórico de todos los proyectos y solo con aprobación del PO.

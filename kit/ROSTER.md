@@ -24,6 +24,10 @@ Un proyecto puede tener su propio `ROSTER.md` en su carpeta; si existe, reemplaz
 | `RAPIDO` | Antigravity | Gemini 3.8 Flash (Medium) | Gemini | Propia | Misma instalación que SENIOR-2, con otro modelo |
 | `SENIOR-3` | Subagente del LIDER en Claude Code local (por defecto) o una sesión aparte de Claude Code | Claude Opus | Claude | Team (compartida con el LIDER) | Skill `charter-desarrollador` en `~/.claude/skills/`. Comparte cuota con el LIDER |
 
+## Capacidad del PO
+
+`capacidad_po_horas_dia: 2` — horas por día hábil que el PO dedica a CHARTER. El cotizador descuenta lo comprometido en proyectos y cotizaciones aprobadas para calcular la duración.
+
 ## Reglas del roster
 
 - **Familia de modelo:** quien prueba o critica el trabajo de otro debería ser de otra familia (`ANCLAJE.md` §4).

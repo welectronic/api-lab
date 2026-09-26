@@ -1,0 +1,31 @@
+{
+ "id": "COT-NNN",
+ "nombre": "<nombre>",
+ "modo": "nuevo",
+ "proyecto": "",
+ "pre_charter": false,
+ "desconocidos_criticos": false,
+ "madurez": "definido",
+ "escala": 1,
+ "rnf_exigentes": 0,
+ "oleada_comprometida": 1,
+ "recomendado": "Recomendado",
+ "parametros": {},
+ "escenarios": [
+  {"id": "MVP", "incluye": "<beneficio en lenguaje de negocio>"},
+  {"id": "Recomendado", "incluye": "<…>"},
+  {"id": "Completo", "incluye": "<…>"}
+ ],
+ "epicas": [
+  {"id": "E0", "nombre": "Preparación", "entrega": "Base de trabajo con pruebas automáticas", "oleada": 0,
+   "rol": "SENIOR-1", "depende": [], "escenario": "MVP", "critica": true,
+   "precondicion": "", "accion_po": "", "espera": [0, 0],
+   "tareas": [
+    {"nombre": "T-000 repositorio, esqueleto y settings", "tam": "M", "grado": "A", "n": 1, "sin_red": false, "manual_po": 0},
+    {"nombre": "CI capa 0, guardas y pruebas", "tam": "M"}
+   ]}
+ ],
+ "riesgos": [
+  {"id": "R1", "riesgo": "<riesgo>", "escenario": "MVP", "horas": 1.0}
+ ]
+}

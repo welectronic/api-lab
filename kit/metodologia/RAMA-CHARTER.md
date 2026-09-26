@@ -22,7 +22,7 @@ rama charter
 - La rama base y los PR quedan limpios: solo código.
 - El LIDER puede hacer push a `charter` sin tocar nunca la rama base.
 
-**Los datos comerciales (`CHARTER-DEV/comercial/`) nunca se copian a la rama ni a `kit/`.** Precios, presupuestos, tarifas y márgenes no se escriben en ningún archivo de `charter`.
+**Los datos comerciales (`CHARTER-DEV/comercial/`) nunca se copian a la rama ni a `kit/`.** Precios, presupuestos, tarifas y márgenes no se escriben en ningún archivo de `charter`. **Tampoco `CHARTER-DEV/cotizaciones/`**: al aprobarse una cotización solo se siembran épicas, arquitectura y decisiones.
 
 **CHARTER-DEV (OneDrive) sigue siendo la fuente maestra** del kit y de `soluciones/`. La rama lleva una copia que el LIDER actualiza cuando el kit cambia.
 
