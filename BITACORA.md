@@ -203,3 +203,7 @@ Registro breve para retomar sin perder contexto. Lo más reciente va arriba.
 - **Decidido:** D-1 repo público, D-2 credencial del PO, D-4. Propuesto D-3 (audit informativo).
 - **Sigue:** SENIOR-1 y SENIOR-2 desarrollan; RAPIDO pre-revisa T-001; luego `CHARTER: api-lab revisar`.
 - **Última verificación en verde:** `node -e` con `app.listen(0)` → 404 en ruta inexistente y cierre limpio, en `main` @ `9b5b5aa`. `npm audit`: 22 vulnerabilidades (línea base).
+
+## 2026-09-26 (kit y preparación automática)
+- **Pasó:** `kit/` sincronizado al CHANGELOG del 2026-09-26 (cotizador). El PO aprobó `configs/ci/charter-init.sh` en el kit maestro. `--verificar` sobre api-lab: todo en verde salvo **`proteger-main` con bypass `always` para el rol admin** [HECHO: API rulesets/23924187], lo que sigue permitiendo push directo a `main` (excepción D-5 vigente). El clon del PO tenía `origin` apuntando por error a `SynaptIA360/dpaa_site`; el LIDER lo devolvió a `welectronic/api-lab` (no se subió nada a dpaa_site).
+- **Sigue:** si el PO quiere cerrar D-5, correr `charter-init.sh welectronic/api-lab --publico --sin-ci` (deja el bypass solo para PR).
